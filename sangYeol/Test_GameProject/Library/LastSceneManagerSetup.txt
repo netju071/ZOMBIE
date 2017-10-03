@@ -1,4 +1,0 @@
-sceneSetups:
-- path: F:/Zombie/Chang9/Zombie_Practice/Assets/My_Scene/My_Scene.unity
-  isLoaded: 1
-  isActive: 1
