@@ -4,14 +4,14 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 12
-  productGUID: 94859095fe9205744bfb51e04c05ced9
+  productGUID: 64a925d1dfabf7a4dac3da61f063d095
   AndroidProfiler: 0
   defaultScreenOrientation: 4
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Zombie_Practice
+  productName: New Unity Project
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -499,14 +499,7 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLUseWasm: 0
   webGLCompressionFormat: 1
-  scriptingDefineSymbols:
-    1: CROSS_PLATFORM_INPUT
-    4: CROSS_PLATFORM_INPUT;MOBILE_INPUT
-    7: CROSS_PLATFORM_INPUT;MOBILE_INPUT
-    14: MOBILE_INPUT
-    17: MOBILE_INPUT
-    20: MOBILE_INPUT
-    22: MOBILE_INPUT
+  scriptingDefineSymbols: {}
   platformArchitecture: {}
   scriptingBackend: {}
   incrementalIl2cppBuild: {}
@@ -515,14 +508,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Zombie_Practice
+  metroPackageName: New Unity Project
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Zombie_Practice
+  metroApplicationDescription: New Unity Project
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
@@ -597,8 +590,8 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 7dd2b845-3d66-4137-96f4-d19486290ffb
-  projectName: Zombie_Practice (1)
+  cloudProjectId: 152c62ac-9809-4b4d-bd4a-1f97696e5ff1
+  projectName: New Unity Project (3)
   organizationId: upple1
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
