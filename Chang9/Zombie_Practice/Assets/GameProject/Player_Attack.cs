@@ -20,6 +20,7 @@ public class Player_Attack : MonoBehaviour {
             Vector3 posit = transform.position;
             Quaternion rotat = transform.rotation;
             posit.y += 0.5f;
+            posit.z += 0.6f;
             Instantiate(arrow, posit, rotat);
             cur_delay = 0;
         }
