@@ -4,31 +4,90 @@ using UnityEngine;
 
 public class Player_Move : MonoBehaviour {
 
+    private float moveSpeed = 1f;
+    private float rotateSpeed = 3.74f;
+    private float attackRange = 7f;
+    private float attackTime = 0.5f, curAttackTime=1f;
+    private Vector3 targetPosition;
+    private bool isMoving, isEnemy;
+
     public Animation anim;
-	void Start ()
+    void Start()
     {
-        anim = GetComponent<Animation>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        isMoving = isEnemy = false;
+    }
+
+    void Update()
     {
-        if (Input.GetKeyDown("a"))
+        curAttackTime += Time.deltaTime;
+        if(isMoving || Input.GetMouseButton(1))
         {
-            anim.Play("Attack");            
+            if(Input.GetMouseButton(1))
+                GetTargetPosition();
+
+
+            isMoving = false;
+            if (isEnemy && (Vector3.Distance(transform.position, targetPosition) <= attackRange))
+            {
+                Debug.Log("Attack!");
+                isEnemy = isMoving = false;
+            }
+
+            else
+            {
+                isMoving = true;
+                MovePlayer();
+            }
+
         }
-        if (Input.GetKeyDown("s"))
+        if(curAttackTime > attackTime)
         {
-            anim.Play("Wait");
+            if (Input.GetKeyDown("a"))
+            {
+                anim.Play("Attack");
+                isMoving = false;
+                curAttackTime = 0;
+            }
+            else if (isMoving)
+            {
+                anim.Play("Walk");
+            }
+            else
+            {
+                anim.Play("Wait");
+            }
+
         }
-        if (Input.GetKeyDown("d"))
+    }
+    
+    void GetTargetPosition()
+    {
+        Plane plane = new Plane(Vector3.up, transform.position);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float point = 0f;
+
+        if (plane.Raycast(ray, out point))
         {
-            anim.Play("Walk");
+            targetPosition = ray.GetPoint(point);
         }
-        if (Input.GetKeyDown("f"))
+
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit);
+
+        if (hit.collider.gameObject.name == "Enemy")
         {
-            anim.Play("Damage");
+            isEnemy = true;
         }
+    }
+    void MovePlayer()
+    {
+        Quaternion rotateAngle = Quaternion.LookRotation(targetPosition - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
+
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+        if (transform.position == targetPosition)
+            isMoving = false;
     }
 
 }
