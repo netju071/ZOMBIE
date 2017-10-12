@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
@@ -10,6 +11,8 @@ public class PlayerControl : MonoBehaviour {
 
     //private CharacterController controller;
     private Vector3 targetPosition;
+    private NavMeshAgent navComponent;
+
     private bool isMoving, isEnemy;
 
     public Animation anim;
@@ -17,6 +20,9 @@ public class PlayerControl : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //controller = GetComponent<CharacterController>();
+        navComponent = GetComponent<NavMeshAgent>();
+
+
         isMoving = isEnemy = false;
 	}
 	
@@ -94,10 +100,13 @@ public class PlayerControl : MonoBehaviour {
     //When the player gets to the target position, stop them from moving.
     void MovePlayer()
     {
-        Quaternion rotateAngle = Quaternion.LookRotation(targetPosition - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
+        //Quaternion rotateAngle = Quaternion.LookRotation(targetPosition - transform.position);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
+        
         //transform.LookAt(targetPosition);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        navComponent.SetDestination(targetPosition);
+
+        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
         //if we are at the target position, then stop moving
         if (transform.position == targetPosition)

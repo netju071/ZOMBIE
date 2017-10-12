@@ -8,9 +8,9 @@ public class HealthBarWork : MonoBehaviour {
     public Image healthBar;
     private GameObject player;
 
-    private float dist_x = 0;
-    private float dist_y = 3.8f;
-    private float dist_z = -0.1f;
+    private float dist_x = -0.03f;
+    private float dist_y = 3.62f;
+    private float dist_z = -0.02f;
 
 
     // Use this for initialization

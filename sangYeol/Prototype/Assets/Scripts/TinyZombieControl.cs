@@ -5,6 +5,10 @@ using UnityEngine;
 public class TinyZombieControl : MonoBehaviour {
     private GameObject player;
 
+    private float distance;
+    private float detectionRange = 8.8f;
+    private float attackRange = 1.5f;
+
     private float moveSpeed = 2.1f;
     private float rotateSpeed = 3.74f;
     private bool isMoving, isAttacking;
@@ -19,17 +23,29 @@ public class TinyZombieControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Vector3.Distance(player.transform.position, transform.position) > 1.5f)
+
+        distance = Vector3.Distance(new Vector3(player.transform.position.x, 0, player.transform.position.z), new Vector3(transform.position.x, 0, transform.position.z));
+
+        if (distance <= attackRange)
         {
-            isMoving = true;
+            isMoving = false;
+            isAttacking = true;
+        }
+        else if(distance <= detectionRange)
+        {
             isAttacking = false;
             MoveZombie();
         }
         else
         {
-            isAttacking = true;
+            isAttacking = isMoving = false;
         }
 
+        PlayAnimation();        
+    }
+
+    void PlayAnimation()
+    {
         if (isMoving)
         {
             anim.Play("crippledWalk");
@@ -46,15 +62,9 @@ public class TinyZombieControl : MonoBehaviour {
 
     void MoveZombie()
     {
+        isMoving = true;
         Quaternion rotateAngle = Quaternion.LookRotation(player.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
-
-        //if we are at the target position, then stop moving
-        if (Vector3.Distance(player.transform.position, transform.position) <= 1.5f)
-        {
-            isMoving = false;
-            isAttacking = true;
-        }
     }
 }

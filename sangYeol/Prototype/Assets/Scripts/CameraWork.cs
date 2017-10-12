@@ -10,7 +10,7 @@ public class CameraWork : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Cha_Knight");
     }
     
 	// Update is called once per frame
