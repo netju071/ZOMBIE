@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player_Move : MonoBehaviour {
 
@@ -12,9 +13,11 @@ public class Player_Move : MonoBehaviour {
     private bool isMoving, isEnemy;
 
     public Animation anim;
+    private NavMeshAgent navComp;
     void Start()
     {
         isMoving = isEnemy = false;
+        navComp = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -24,7 +27,6 @@ public class Player_Move : MonoBehaviour {
         {
             if(Input.GetMouseButton(1))
                 GetTargetPosition();
-
 
             isMoving = false;
             if (isEnemy && (Vector3.Distance(transform.position, targetPosition) <= attackRange))
@@ -42,7 +44,7 @@ public class Player_Move : MonoBehaviour {
         }
         if(curAttackTime > attackTime)
         {
-            if (Input.GetKeyDown("a"))
+            if (Input.GetMouseButtonDown(0))
             {
                 anim.Play("Attack");
                 isMoving = false;
@@ -81,11 +83,11 @@ public class Player_Move : MonoBehaviour {
     }
     void MovePlayer()
     {
-        Quaternion rotateAngle = Quaternion.LookRotation(targetPosition - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
+        //Quaternion rotateAngle = Quaternion.LookRotation(targetPosition - transform.position);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
+        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+       navComp.SetDestination(isMoving == true ? targetPosition : transform.position);
         if (transform.position == targetPosition)
             isMoving = false;
     }

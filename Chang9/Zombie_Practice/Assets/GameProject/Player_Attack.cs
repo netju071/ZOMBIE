@@ -15,7 +15,7 @@ public class Player_Attack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         cur_delay += Time.deltaTime;
-        if(Input.GetKeyDown("a") && cur_delay>=attack_delay)
+        if(Input.GetMouseButtonDown(0) && cur_delay>=attack_delay)
         {
             Vector3 posit = transform.position;
             Quaternion rotat = transform.rotation;
