@@ -5,25 +5,23 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 
-    private float moveSpeed = 4.2f;
-    private float rotateSpeed = 3.74f;
-    private float attackRange = 7f;
+    //private float rotateSpeed = 3.74f;
+    
 
-    //private CharacterController controller;
     private Vector3 targetPosition;
     private NavMeshAgent navComponent;
+    private GameObject enemy;
+    private float distance;
+    private float attackRange = 7f;
 
-    private bool isMoving, isEnemy;
+    private bool isEnemy, isMoving, isAttacking;
 
     public Animation anim;
-    
+
     // Use this for initialization
     void Start () {
-        //controller = GetComponent<CharacterController>();
         navComponent = GetComponent<NavMeshAgent>();
-
-
-        isMoving = isEnemy = false;
+        isEnemy = isMoving = isAttacking = false;
 	}
 	
 	// Update is called once per frame
@@ -31,10 +29,38 @@ public class PlayerControl : MonoBehaviour {
 
         if (Input.GetMouseButton(1)) //Right Mouse Button
         {
-            isMoving = false;
+            GetTargetPosition(); //Find out where the player clicked on the screen and Make sure object is enemy
+            BrakePlayer();
 
-            //if the player clicked on the screen, find out where
-            GetTargetPosition();
+
+            //isMoving = false; 
+            navComponent.SetDestination(transform.position); //클릭하면 이동 정지
+
+
+            
+
+            if (isEnemy)
+            {
+                distance = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(enemy.transform.position.x, 0, enemy.transform.position.z));
+
+                if (distance <= attackRange)
+                {
+                    //isMoving = false;
+                    isAttacking = true;
+                }
+                else
+                {
+                    MovePlayer();
+                }
+            }
+
+            else //클릭한 위치가 스테이지이므로, 해당 위치로 이동한다.
+            {
+                MovePlayer();
+            }
+
+
+
 
             if (isEnemy && (Vector3.Distance(transform.position, targetPosition) <= attackRange)) //클릭한 위치에 적이 위치하고 공격 가능하면 공격
             {
@@ -65,15 +91,25 @@ public class PlayerControl : MonoBehaviour {
             }
         }
 
+        
+
+    }
+
+    //Play Animation
+    void PlayAnimation()
+    {
         if (isMoving)
         {
             anim.Play("Walk");
+        }
+        else if (isAttacking)
+        {
+            anim.Play("Attack");
         }
         else
         {
             anim.Play("Wait");
         }
-
     }
 
     //Get the target position
@@ -86,13 +122,23 @@ public class PlayerControl : MonoBehaviour {
         if (plane.Raycast(ray, out point))
             targetPosition = ray.GetPoint(point);
 
-        //Check for enemies at the target position
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
+        IsEnemy(ray);
+    }
 
-        if (hit.collider.gameObject.name == "Enemy")
+    
+    //Check for enemies at the target position
+    void IsEnemy(Ray ray_)
+    {
+        RaycastHit hit;
+        Physics.Raycast(ray_, out hit);
+        if (hit.collider.gameObject.tag == "Enemy")
         {
             isEnemy = true;
+            enemy = GameObject.Find(hit.collider.gameObject.name);
+        }
+        else
+        {
+            isEnemy = false;
         }
     }
 
@@ -100,19 +146,28 @@ public class PlayerControl : MonoBehaviour {
     //When the player gets to the target position, stop them from moving.
     void MovePlayer()
     {
-        //Quaternion rotateAngle = Quaternion.LookRotation(targetPosition - transform.position);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
-        
-        //transform.LookAt(targetPosition);
+        isMoving = true;
         navComponent.SetDestination(targetPosition);
-
-        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
         //if we are at the target position, then stop moving
         if (transform.position == targetPosition)
             isMoving = false;
 
+        //Quaternion rotateAngle = Quaternion.LookRotation(targetPosition - transform.position);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
+
+        //transform.LookAt(targetPosition);
+
+
+        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
         //Debug.DrawLine(transform.position, targetPosition, Color.red);
+    }
+
+    void BrakePlayer()
+    {
+        isMoving = false;
+        navComponent.SetDestination(transform.position);
     }
 
 }

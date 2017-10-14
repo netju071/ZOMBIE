@@ -25,7 +25,10 @@ public class TinyZombieControl : MonoBehaviour {
 	void Update () {
 
         distance = Vector3.Distance(new Vector3(player.transform.position.x, 0, player.transform.position.z), new Vector3(transform.position.x, 0, transform.position.z));
-
+        if (isAttacking)
+        {
+            return;
+        }
         if (distance <= attackRange)
         {
             isMoving = false;
@@ -66,5 +69,13 @@ public class TinyZombieControl : MonoBehaviour {
         Quaternion rotateAngle = Quaternion.LookRotation(player.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+
+        distance = Vector3.Distance(new Vector3(player.transform.position.x, 0, player.transform.position.z), new Vector3(transform.position.x, 0, transform.position.z));
+        if (distance <= attackRange)
+        {
+            isMoving = false;
+            isAttacking = true;
+        }
+            
     }
 }
