@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Player_Move : MonoBehaviour {
-
-    private float moveSpeed = 1f;
+    
     private float rotateSpeed = 3.74f;
     private float attackRange = 7f;
     private float attackTime = 0.5f, curAttackTime=1f;
@@ -23,33 +22,24 @@ public class Player_Move : MonoBehaviour {
     void Update()
     {
         curAttackTime += Time.deltaTime;
-        if(isMoving || Input.GetMouseButton(1))
+        
+        if (curAttackTime > attackTime)
         {
-            if(Input.GetMouseButton(1))
-                GetTargetPosition();
-
-            isMoving = false;
-            if (isEnemy && (Vector3.Distance(transform.position, targetPosition) <= attackRange))
-            {
-                Debug.Log("Attack!");
-                isEnemy = isMoving = false;
-            }
-
-            else
+            if (Input.GetMouseButton(1))
             {
                 isMoving = true;
+                GetTargetPosition();
                 MovePlayer();
             }
 
-        }
-        if(curAttackTime > attackTime)
-        {
             if (Input.GetMouseButtonDown(0))
             {
                 anim.Play("Attack");
-                isMoving = false;
+                targetPosition = transform.position;
+                MovePlayer();
                 curAttackTime = 0;
             }
+
             else if (isMoving)
             {
                 anim.Play("Walk");
@@ -58,7 +48,6 @@ public class Player_Move : MonoBehaviour {
             {
                 anim.Play("Wait");
             }
-
         }
     }
     
@@ -83,11 +72,7 @@ public class Player_Move : MonoBehaviour {
     }
     void MovePlayer()
     {
-        //Quaternion rotateAngle = Quaternion.LookRotation(targetPosition - transform.position);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
-
-        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-       navComp.SetDestination(isMoving == true ? targetPosition : transform.position);
+        navComp.SetDestination(targetPosition);
         if (transform.position == targetPosition)
             isMoving = false;
     }
