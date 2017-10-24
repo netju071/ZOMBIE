@@ -1,101 +1,157 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerControl : MonoBehaviour {
 
-    //private float rotateSpeed = 3.74f;
-    
-
+    private NavMeshAgent navAgent;
+    private GameObject targetObject;
     private Vector3 targetPosition;
-    private NavMeshAgent navComponent;
-    private GameObject enemy;
-    private float distance;
-    private float attackRange = 7f;
-
-    private bool isEnemy, isMoving, isAttacking;
-
     public Animation anim;
+    bool isMoving, isAttacking;
 
-    // Use this for initialization
-    void Start () {
-        navComponent = GetComponent<NavMeshAgent>();
-        isEnemy = isMoving = isAttacking = false;
+    private float attackRange;
+
+	// Use this for initialization
+	void Start () {
+        navAgent = GetComponent<NavMeshAgent>();
+        SetCharacterStats();
+        SetCharacterState();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (Input.GetMouseButton(1)) //Right Mouse Button
+        
+        if (Input.GetMouseButton(1))
         {
-            GetTargetPosition(); //Find out where the player clicked on the screen and Make sure object is enemy
-            BrakePlayer();
-
-
-            //isMoving = false; 
-            navComponent.SetDestination(transform.position); //클릭하면 이동 정지
-
-
-            
-
-            if (isEnemy)
+            if (isAttacking)
             {
-                distance = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(enemy.transform.position.x, 0, enemy.transform.position.z));
+                return;
+            }
+            else if (isMoving)
+            {
+                StopMoving();
+            }
 
-                if (distance <= attackRange)
+            SetTarget();
+
+            //Debug.DrawRay(new Vector3(transform.position.x, 1.0f, transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z) * attackRange, Color.red);
+
+
+
+            if (targetObject.tag == "Enemy" && DistanceFromTarget() <= attackRange)
+            {
+                AttackTargetObject();
+            }
+            else
+            {
+                MoveToTargetObject();
+            }
+        }
+        else
+        {
+            if (isMoving)
+            {
+                Debug.Log("걷는거 힘들다..."+DistanceFromTarget());
+                if (targetObject.tag == "Enemy" && DistanceFromTarget() <= attackRange)
                 {
-                    //isMoving = false;
-                    isAttacking = true;
+                    StopMoving();
+                    AttackTargetObject();
                 }
                 else
                 {
-                    MovePlayer();
+                    MoveToTargetObject();
                 }
             }
-
-            else //클릭한 위치가 스테이지이므로, 해당 위치로 이동한다.
+            else if (isAttacking)
             {
-                MovePlayer();
-            }
-
-
-
-
-            if (isEnemy && (Vector3.Distance(transform.position, targetPosition) <= attackRange)) //클릭한 위치에 적이 위치하고 공격 가능하면 공격
-            {
-                Debug.Log("공격!");
-                isEnemy = false;
-                isMoving = false;
+                Debug.Log("공격중이니까 말걸지마ㅡㅡ!");
+                AttackTargetObject();
             }
             else
             {
-                //set the player to move
-                isMoving = true;
-                MovePlayer();
+                Debug.Log("지금 아무것도 안하고 있지롱~");
             }
+
         }
 
-        //if we are still moving, then move the player
-        else if (isMoving)
-        {
-            if (isEnemy && (Vector3.Distance(transform.position, targetPosition) <= attackRange)) //클릭한 위치에 적이 위치하고 공격 가능하면 공격
-            {
-                Debug.Log("공격!");
-                isEnemy = false;
-                isMoving = false;
-            }
-            else
-            {
-                MovePlayer();
-            }
-        }
+        PlayAnimation();
+	}
 
-        
-
+    void SetCharacterStats()
+    {
+        attackRange = 1.4f;
     }
 
-    //Play Animation
+    void SetCharacterState()
+    {
+        isMoving = isAttacking = false;
+    }
+
+    void InitializeTarget()
+    {
+        targetObject = null;
+        targetPosition = Vector3.zero;
+    }
+    void SetTarget()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+        {
+            targetObject = hit.collider.gameObject;
+            targetPosition = hit.point;
+        }
+        else
+        {
+            InitializeTarget();
+        }
+        
+    }
+
+    void MoveToTargetObject()
+    {
+        isMoving = true;
+        navAgent.destination = targetPosition;
+        //navAgent.SetDestination(targetPosition);
+        //navAgent.Move(targetPosition);
+        if (DistanceFromTarget()==0)
+            isMoving = false;
+    }
+
+    void StopMoving()
+    {
+        isMoving = false;
+        navAgent.destination = transform.position;
+    }
+
+    float DistanceFromTarget()
+    {
+        return Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(targetPosition.x, 0, targetPosition.z));
+    }
+
+    void AttackTargetObject()
+    {
+        transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
+        isAttacking = true;
+        Debug.Log("죽여버리겠어!");
+        
+        //Debug.DrawRay(transform.position, transform.forward * attackRange, Color.blue);
+
+        RaycastHit hit;
+        //Debug.DrawRay(transform.position, transform.forward * attackRange);
+        if (Physics.Raycast(new Vector3(transform.position.x, 1.0f, transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z), out hit, attackRange)) //발사 위치, 발사 방향, 충돌 결과, 최대 거리
+        {
+            Debug.DrawRay(new Vector3(transform.position.x, 1.0f, transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z) * attackRange, Color.red);
+            Debug.Log("Damage");
+        }
+        else
+        {
+            Debug.DrawRay(new Vector3(transform.position.x, 1.0f, transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z) * attackRange, Color.blue);
+            Debug.Log("Miss");
+        }
+    }
+
     void PlayAnimation()
     {
         if (isMoving)
@@ -111,63 +167,4 @@ public class PlayerControl : MonoBehaviour {
             anim.Play("Wait");
         }
     }
-
-    //Get the target position
-    void GetTargetPosition()
-    {
-        Plane plane = new Plane(Vector3.up, transform.position);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float point = 0f;
-
-        if (plane.Raycast(ray, out point))
-            targetPosition = ray.GetPoint(point);
-
-        IsEnemy(ray);
-    }
-
-    
-    //Check for enemies at the target position
-    void IsEnemy(Ray ray_)
-    {
-        RaycastHit hit;
-        Physics.Raycast(ray_, out hit);
-        if (hit.collider.gameObject.tag == "Enemy")
-        {
-            isEnemy = true;
-            enemy = GameObject.Find(hit.collider.gameObject.name);
-        }
-        else
-        {
-            isEnemy = false;
-        }
-    }
-
-    //Moves the player in the right direction and also rotates them to look at the target position.
-    //When the player gets to the target position, stop them from moving.
-    void MovePlayer()
-    {
-        isMoving = true;
-        navComponent.SetDestination(targetPosition);
-
-        //if we are at the target position, then stop moving
-        if (transform.position == targetPosition)
-            isMoving = false;
-
-        //Quaternion rotateAngle = Quaternion.LookRotation(targetPosition - transform.position);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, rotateAngle, rotateSpeed * Time.deltaTime);
-
-        //transform.LookAt(targetPosition);
-
-
-        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-        //Debug.DrawLine(transform.position, targetPosition, Color.red);
-    }
-
-    void BrakePlayer()
-    {
-        isMoving = false;
-        navComponent.SetDestination(transform.position);
-    }
-
 }

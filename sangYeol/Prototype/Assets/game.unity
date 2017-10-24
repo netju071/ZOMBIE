@@ -1924,7 +1924,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 521057025}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c009f92971682944aabbee9c1bddc8ff, type: 3}
   m_Name: 
@@ -3363,11 +3363,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1580954662}
-  - component: {fileID: 1864138673}
   - component: {fileID: 1017453824}
   - component: {fileID: 1017453823}
-  - component: {fileID: 1017453827}
-  - component: {fileID: 1017453825}
   - component: {fileID: 1017453826}
   m_Layer: 0
   m_Name: Cha_Knight
@@ -3404,18 +3401,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &1017453825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1017453822}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad0c86686ef13584792a2c0bf09e2655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 1864138673}
 --- !u!195 &1017453826
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3437,18 +3422,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &1017453827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1017453822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1e5c5542f460104fa273d46c21fd924, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 1864138673}
 --- !u!4 &1040533120 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4665380054578146, guid: b040ac3083d311841b3c663f6ca806c9,
@@ -4135,7 +4108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1395076707
 Transform:
   m_ObjectHideFlags: 0
@@ -5868,26 +5841,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: e21456eb7a6b18e4480b596463b9692a, type: 2}
   m_PrefabInternal: {fileID: 1849298337}
---- !u!111 &1864138673
-Animation:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11100000, guid: df0777a2e75ec7048b28e7c394efbd53,
-    type: 3}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1017453822}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: ac1d9b0420ad1b146b5d57d7729b647e, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: ac1d9b0420ad1b146b5d57d7729b647e, type: 3}
-  - {fileID: 7400000, guid: afa46a7eafad7874da3988d082799d38, type: 3}
-  - {fileID: 7400000, guid: 49b297db20eec434cb72977e88d5107b, type: 3}
-  - {fileID: 7400000, guid: cb0d6a1bee21e754e955d5a0bed61fdf, type: 3}
-  - {fileID: 7400000, guid: 119550f2b2b0fe748875dc68a648b28c, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 1
 --- !u!1 &1871565470
 GameObject:
   m_ObjectHideFlags: 0
@@ -6320,6 +6273,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2064782178}
+  - component: {fileID: 2064782177}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6327,6 +6281,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2064782177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2064782176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86cc0d4eea6dc7d44822b8d964822c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2064782178
 Transform:
   m_ObjectHideFlags: 0
