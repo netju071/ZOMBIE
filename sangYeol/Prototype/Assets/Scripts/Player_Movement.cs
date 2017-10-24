@@ -30,10 +30,11 @@ public partial class Player_Controller : MonoBehaviour
 
         if (DistanceFromTarget() == 0)
         {
-            StopMovement();
+            SetStatusOfMovement(false);
+            //StopMovement();
         }
-        else
-            Debug.Log("이동~");
+        //else
+        //    Debug.Log("이동~");
     }
     private void StopMovement()
     {

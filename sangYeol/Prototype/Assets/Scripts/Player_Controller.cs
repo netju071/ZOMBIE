@@ -12,12 +12,14 @@ public partial class Player_Controller : MonoBehaviour
         InitializeTargeting();
         InitializeAttack();
         InitializeAnimator();
+        InitializeHealth();
     }
 	
 	// Update is called once per frame
 	private void Update()
     {
-        Debug.Log("Distance: "+DistanceFromTarget());
+        //Debug.Log("Distance: "+DistanceFromTarget());
+        //Debug.Log("isMoving: " + GetStatusOfMovement()+", isAttacking: "+GetStatusOfAttack());
         if (Input.GetMouseButton(1))
         {
             if (GetStatusOfAttack())
@@ -42,5 +44,8 @@ public partial class Player_Controller : MonoBehaviour
         {
 
         }
-	}
+
+        SetStatusOfAnimatorParameters();
+        MoveHealthBarAlongPlayer();
+    }
 }

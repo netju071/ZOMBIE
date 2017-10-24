@@ -8,4 +8,9 @@ public partial class Player_Controller : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
+    private void SetStatusOfAnimatorParameters()
+    {
+        anim.SetBool("isMoving", GetStatusOfMovement());
+        anim.SetBool("isAttacking", GetStatusOfAttack());
+    }
 }
