@@ -6393,6 +6393,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 101924, guid: 4224c09beaffb8b49a0c4b2c9be96a33, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4224c09beaffb8b49a0c4b2c9be96a33, type: 2}
   m_IsPrefabParent: 0
@@ -6671,10 +6675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86cc0d4eea6dc7d44822b8d964822c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bow: {fileID: 0}
-  sword: {fileID: 0}
-  arrow: {fileID: 0}
-  sword_range: {fileID: 0}
 --- !u!4 &2064782178
 Transform:
   m_ObjectHideFlags: 0

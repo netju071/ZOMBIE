@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 86cc0d4eea6dc7d44822b8d964822c3f
-timeCreated: 1509371339
+timeCreated: 1509512814
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bow: {fileID: 101924, guid: 4224c09beaffb8b49a0c4b2c9be96a33, type: 2}
+  - sword: {fileID: 177428, guid: 7aea892cf56e0344f84ae9eea30c643a, type: 2}
+  - arrow: {fileID: 1135144879879010, guid: cd336e84509165949819d4d00135f734, type: 2}
+  - sword_range: {fileID: 1418275215537444, guid: 6a89d5e8e19e3e44f845fa6a0c8170bc,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

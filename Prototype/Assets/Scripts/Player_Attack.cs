@@ -40,20 +40,35 @@ public partial class Player_Controller : MonoBehaviour
         SetStatusOfAttack(true);
         player.transform.LookAt(new Vector3(targetPosition.x, player.transform.position.y, targetPosition.z));
         CoolUp();
-        if (GetStatusOfCool() == false)
+        //if (GetStatusOfCool() == false)
+        //{
+        //    switch (GetCurWeaponType())
+        //    {
+        //        case 1:
+        //            Instantiate(sword_range, player.transform.position, player.transform.rotation);
+        //            break;
+        //        case 2:
+        //            Instantiate(arrow, player.transform.position, player.transform.rotation);
+        //            break;
+        //        default:
+        //            Debug.Log("[경고]: CurWeaponType값이 범위에서 벗어났습니다.");
+        //            break;
+        //    }
+        //}
+    }
+    public void TmpFunc()
+    {
+        switch (GetCurWeaponType())
         {
-            switch (GetCurWeaponType())
-            {
-                case 1:
-                    Instantiate(sword_range, player.transform.position, player.transform.rotation);
-                    break;
-                case 2:
-                    Instantiate(arrow, player.transform.position, player.transform.rotation);
-                    break;
-                default:
-                    Debug.Log("[경고]: CurWeaponType값이 범위에서 벗어났습니다.");
-                    break;
-            }
+            case 1:
+                Instantiate(sword_range, player.transform.position, player.transform.rotation);
+                break;
+            case 2:
+                Instantiate(arrow, player.transform.position, player.transform.rotation);
+                break;
+            default:
+                Debug.Log("[경고]: CurWeaponType값이 범위에서 벗어났습니다.");
+                break;
         }
     }
 

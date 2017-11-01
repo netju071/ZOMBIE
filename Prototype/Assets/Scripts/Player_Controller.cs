@@ -8,8 +8,8 @@ public partial class Player_Controller : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("/Player/Cha_Knight");
-        InitializeAnimator();
         InitializeWeapon();
+        InitializeAnimator();
         InitializeMovement();
         InitializeTargeting();
         InitializeAttack();
@@ -49,6 +49,7 @@ public partial class Player_Controller : MonoBehaviour
             }
         }
 
+
         if (GetStatusOfMovement())
         {
             if (GetTargetObjectTag() == "Enemy" && DistanceFromTarget() <= GetAttackRange())
@@ -65,8 +66,6 @@ public partial class Player_Controller : MonoBehaviour
         {
             AttackTargetObject();
         }
-
-
 
         SwapWeapon();
         MoveHealthBarAlongPlayer();
