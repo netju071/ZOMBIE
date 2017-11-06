@@ -14,7 +14,6 @@ public class Zombie_Range : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //Debug.Log("Find Collider");
             GameObject.Find("/Player").GetComponent<Player_Controller>().SetStatusOfCollider(true);
         }
     }

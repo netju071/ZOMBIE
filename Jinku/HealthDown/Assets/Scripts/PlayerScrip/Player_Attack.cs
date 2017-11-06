@@ -3,7 +3,6 @@
 public partial class Player_Controller : MonoBehaviour
 {
     private float attackRange, nextTime, attackInterval;
-
     private void InitializeAttack()
     {
         SetAttackRange(2.0f);
@@ -44,7 +43,7 @@ public partial class Player_Controller : MonoBehaviour
             SetStatusOfAttack(false);
     }
 
-    public void TmpFunc()
+    public void CreatCollider()
     {
         switch (GetCurWeaponType())
         {
@@ -66,7 +65,6 @@ public partial class Player_Controller : MonoBehaviour
         SetStatusOfCool(true);
         nextTime = Time.time + attackInterval;
     }
-
     private void CoolUp()
     {
         if (nextTime <= Time.time)
@@ -74,4 +72,8 @@ public partial class Player_Controller : MonoBehaviour
             SetStatusOfCool(false);
         }
     }
+    //public bool BeingAttacked ()
+    //{
+
+    //}
 }

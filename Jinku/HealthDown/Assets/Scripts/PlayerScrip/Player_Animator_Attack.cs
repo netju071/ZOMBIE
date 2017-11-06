@@ -5,7 +5,7 @@ public class Player_Animator_Attack : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameObject.Find("/Player").GetComponent<Player_Controller>().TmpFunc();
+        GameObject.Find("/Player").GetComponent<Player_Controller>().CreatCollider();
     }
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

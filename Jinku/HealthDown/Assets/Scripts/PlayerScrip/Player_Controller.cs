@@ -3,10 +3,7 @@
 public partial class Player_Controller : MonoBehaviour
 {
     private GameObject player;
-    /// <summary> checking the Collider
     private bool isCollider;
-    /// </summary>
-
     // Use this for initialization
     private void Awake()
     {
@@ -17,7 +14,6 @@ public partial class Player_Controller : MonoBehaviour
         InitializeTargeting();
         InitializeAttack();
         InitializeHealth();
-        isCollider = false;
     }
 	
 	// Update is called once per frame
@@ -77,11 +73,10 @@ public partial class Player_Controller : MonoBehaviour
     public void SetStatusOfCollider(bool status)
     {
         isCollider = status;
-        //Debug.Log("SetCollider");
     }
     public bool GetStatusOfCollider()
     {
         return isCollider;
     }
-     ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
 }
