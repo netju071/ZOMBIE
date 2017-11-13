@@ -8,7 +8,7 @@ public class TinyZombie_Animator_attack : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().TmpFunc();
+        GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().CreateCollider();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -19,7 +19,12 @@ public class TinyZombie_Animator_attack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameObject.Find("/Player").GetComponent<Player_Controller>().Decreasehealth();
+        if (GameObject.Find("/Player").GetComponent<Player_Controller>().GetStatusOfBeingAttacked() == true)
+        {
+            GameObject.Find("/Player").GetComponent<Player_Controller>().DecreaseHealth(GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().GetTinyZombieDamage());
+        }
+        //GameObject.Find("/Player").GetComponent<Player_Controller>().DecreaseHealth(GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().GetTinyZombieDamage());
+        Resources.Load<GameObject>("Create/Zombie_Range").GetComponent<Zombie_Range>().DestoryCollider();
         GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().CoolDown();
         //Debug.Log("Onanimator");
         //Debug.Log(GameObject.Find("/Player").GetComponent<Player_Controller>().GetStatusOfCollider());

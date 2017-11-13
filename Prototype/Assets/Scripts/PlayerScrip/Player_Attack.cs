@@ -32,7 +32,6 @@ public partial class Player_Controller : MonoBehaviour
     {
         beingAttacked = status;
     }
-
     public float GetAttackRange()
     {
         return attackRange;

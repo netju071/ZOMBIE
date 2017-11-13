@@ -45,7 +45,7 @@ public partial class Player_Controller : MonoBehaviour
     {
         frameOfHealthBar.transform.position = new Vector3(player.transform.position.x + dist_x, player.transform.position.y + dist_y, player.transform.position.z + dist_z);
     }
-    public void Decreasehealth(float damage)
+    public void DecreaseHealth(float damage)
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
         SetHealthBar(GetCurrentHealth()/GetMaxHealth());

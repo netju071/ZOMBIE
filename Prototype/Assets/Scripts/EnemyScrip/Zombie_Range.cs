@@ -4,21 +4,35 @@ using UnityEngine;
 
 public class Zombie_Range : MonoBehaviour
 {
-    // Use this for initialization
-    void Start()
+    private float delTime;
+    private void Start()
     {
-        Destroy(GameObject.Find("Zombie_Range(Clone)"), 1.0f);
+        SetDeleteTime(1.0f);
     }
-    /// <summary>  decide th collider
+    void Update()
+    {
+        if (GetDeleteTime() <= Time.time)
+        {
+            DestoryCollider();
+        }
+    }
+    private void SetDeleteTime(float value)
+    {
+        delTime = Time.time + value;
+    }
+    public float GetDeleteTime()
+    {
+        return delTime;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            GameObject.Find("/Player").GetComponent<Player_Controller>().SetStatusOfCollider(true);
+            GameObject.Find("/Player").GetComponent<Player_Controller>().SetStatusOfBeingAttacked(true);
         }
     }
-    /// </summary>
-
-
-
+    public void DestoryCollider()
+    {
+        Destroy(GameObject.Find("Zombie_Range(Clone)"), 0.0f);
+    }
 }

@@ -8,7 +8,9 @@ public partial class TinyZombie_Controller : MonoBehaviour
     // Use this for initialization
     private void Awake()
     {
+        //zombie = GameObject.Find(gameObject.name);
         zombie = GameObject.Find("/Enemy/TinyZombie/mummy_rig");
+        //zombie = GetComponent<GameObject>();
         player = GameObject.Find("/Player/Cha_Knight");
         InitializeAnimator();
         InitializeMovement();
@@ -28,10 +30,10 @@ public partial class TinyZombie_Controller : MonoBehaviour
         {
             zombie = GameObject.Find("/Enemy/TinyZombie/mummy_rig");
             navAgent = zombie.GetComponent<NavMeshAgent>();
-            HealthBar = GameObject.Find("/Enemy/TinyZombie/HealthBar");
-            Health = GameObject.Find("/Enemy/TinyZombie/HealthBar/HealthBackground/Health");
+            frameOfHealthBar = GameObject.Find("/Enemy/TinyZombie/HealthBar");
+            healthBar = GameObject.Find("/Enemy/TinyZombie/HealthBar/HealthBackground/Health");
         }
-        //Debug.Log("distance: " +DistanceFromTarget());
+
         if (GetAttackRange()<DistanceFromTarget()&& DistanceFromTarget()<7)
         {
             MoveToTargetObject();
@@ -53,14 +55,4 @@ public partial class TinyZombie_Controller : MonoBehaviour
         }
         MoveHealthBarAlongZombie();
     }
-    ////////////////////////////////////////// collider statuse change function
-    public void SetStatusOfCollider(bool status)
-    {
-        isCollider = status;
-    }
-    public bool GetStatusOfCollider()
-    {
-        return isCollider;
-    }
-    ///////////////////////////////////////////////
 }

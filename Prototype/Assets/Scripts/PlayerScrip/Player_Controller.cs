@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI;
 public partial class Player_Controller : MonoBehaviour
 {
     private GameObject player;
- 
     // Use this for initialization
     private void Awake()
     {
@@ -67,6 +66,5 @@ public partial class Player_Controller : MonoBehaviour
         }
         SwapWeapon();
         MoveHealthBarAlongPlayer();
-        
     }
 }

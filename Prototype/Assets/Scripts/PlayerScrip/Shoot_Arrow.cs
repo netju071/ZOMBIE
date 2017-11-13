@@ -44,7 +44,7 @@ public class Shoot_Arrow : MonoBehaviour {
     {
         if (other.gameObject.tag == "Enemy")
         {
-            GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().SetStatusOfCollider(true);
+            GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().SetStatusOfBeingAttacked(true);
         }
         DestoryCollider();
     }
