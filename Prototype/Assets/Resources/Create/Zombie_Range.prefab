@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4308296086686004}
   - component: {fileID: 136875360359877996}
-  - component: {fileID: 114504383646509154}
+  - component: {fileID: 114350551021379186}
   m_Layer: 0
   m_Name: Zombie_Range
   m_TagString: Range
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114504383646509154
+--- !u!114 &114350551021379186
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1578931934390626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a80067203c308249803794f0e5abd6d, type: 3}
+  m_Script: {fileID: 11500000, guid: ef457c425ae34c54383ce6d914c78d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &136875360359877996

@@ -3,30 +3,21 @@
 public class Player_Animator_Attack : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        GameObject.Find("/Player").GetComponent<Player_Controller>().CreateCollider();
-    }
+    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //}
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    //
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    //Debug.Log(stateInfo.normalizedTime);
+    //    //if (stateInfo.normalizedTime - 0.5f >=0 && stateInfo.normalizedTime - 0.5f <= 0.03f)
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().GetStatusOfBeingAttacked() == true)
-        {
-            GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().DecreaseHealth(GameObject.Find("/Player").GetComponent<Player_Controller>().GetPlayerDamage());
-        }
-
-        GameObject.Find("/Player").GetComponent<Player_Controller>().CoolDown();
-
-        if (GameObject.Find("/Player").GetComponent<Player_Controller>().GetCurWeaponType()==1)
-        {
-            Resources.Load<GameObject>("Create/Sword_Range").GetComponent<Sword_Range>().DestoryCollider();
-        }
-
+        animator.gameObject.GetComponent<Player_Controller>().CoolDown();
+        animator.gameObject.GetComponent<Player_Controller>().CreateAttackResource();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

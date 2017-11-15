@@ -9,7 +9,6 @@ public partial class Player_Controller : MonoBehaviour
     private float dist_y;
     private float dist_z;
 
-
     private void InitializeHealth()
     {
         frameOfHealthBar = GameObject.Find("/Player/HealthBar");
@@ -19,7 +18,6 @@ public partial class Player_Controller : MonoBehaviour
         dist_x = -0.03f;
         dist_y = 3.62f;
         dist_z = -0.02f;
-        
     }
     private void SetMaxHealth(float value)
     {
@@ -49,6 +47,5 @@ public partial class Player_Controller : MonoBehaviour
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
         SetHealthBar(GetCurrentHealth()/GetMaxHealth());
-        SetStatusOfBeingAttacked(false);
     }
 }

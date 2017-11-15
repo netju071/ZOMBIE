@@ -17,7 +17,6 @@ public partial class Player_Controller : MonoBehaviour
         //sword_range = Resources.Load<GameObject>("Create/Sword_Range");
 
         SetCurWeaponType(1);
-        //bow.SetActive(false);
     }
     private void SetCurWeaponType(int type)
     {

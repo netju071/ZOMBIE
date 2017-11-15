@@ -5,7 +5,6 @@ public partial class TinyZombie_Controller : MonoBehaviour
 {
     private NavMeshAgent navAgent;
 
-
     private void InitializeMovement()
     {
         navAgent = zombie.GetComponent<NavMeshAgent>();

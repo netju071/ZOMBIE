@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+
 public partial class Player_Controller : MonoBehaviour
 {
     private GameObject player;
@@ -66,5 +66,11 @@ public partial class Player_Controller : MonoBehaviour
         }
         SwapWeapon();
         MoveHealthBarAlongPlayer();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Range")
+            DecreaseHealth(other.gameObject.transform.parent.GetComponent<TinyZombie_Controller>().GetTinyZombieDamage());
     }
 }

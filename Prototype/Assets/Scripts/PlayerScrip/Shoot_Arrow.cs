@@ -17,7 +17,7 @@ public class Shoot_Arrow : MonoBehaviour {
 
         if(GetDeleteTime() <= Time.time)
         {
-            DestoryCollider();
+            Destroy(gameObject);
         }
     }
     private void SetArrowSpeed(float value)
@@ -42,14 +42,6 @@ public class Shoot_Arrow : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            GameObject.Find("/Enemy/TinyZombie").GetComponent<TinyZombie_Controller>().SetStatusOfBeingAttacked(true);
-        }
-        DestoryCollider();
-    }
-    public void DestoryCollider()
-    {
-        Destroy(GameObject.Find("arrow(Clone)"), 0.0f);
+        Destroy(gameObject);
     }
 }

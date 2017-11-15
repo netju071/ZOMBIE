@@ -1,25 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
-public class MissionWindow : MonoBehaviour {
-    private Text countText;
-    public int count;
-
+public class MissionWindow : MonoBehaviour
+{
+    public Rect windowSize;
+    private Vector3 winPos = new Vector3(50, 0, 100);
+    //private Camera cam = GameObject.Find("Main Camera").GetComponent<Camera>();
     // Use this for initialization
     void Start ()
     {
-        countText = GameObject.Find("/Canvas/Image/countText").GetComponent<Text>();
-        count = 0;
+        //windowSize = new Rect(cam.WorldToScreenPoint(winPos).x, cam.WorldToScreenPoint(winPos).z, 300, 100);
     }
 	// Update is called once per frame
 	void Update ()
     {
-        DyingZombieCount();
+    
     }
-    private void DyingZombieCount()
+    private void MissionWin(int id)
     {
-        countText.text = "DyingZombieCount : " + count.ToString();
+        //GUI.DragWindow();
+    }
+    public void OnGUI()
+    {
+        windowSize = GUI.Window(0, windowSize, MissionWin, "Mission");
     }
 }

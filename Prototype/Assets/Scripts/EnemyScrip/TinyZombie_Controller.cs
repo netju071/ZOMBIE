@@ -8,9 +8,8 @@ public partial class TinyZombie_Controller : MonoBehaviour
     // Use this for initialization
     private void Awake()
     {
-        //zombie = GameObject.Find(gameObject.name);
-        zombie = GameObject.Find("/Enemy/TinyZombie/mummy_rig");
-        //zombie = GetComponent<GameObject>();
+        //zombie = GameObject.Find("/Enemy/TinyZombie/mummy_rig");
+        zombie = GameObject.Find("/Enemy/" + gameObject.name + "/mummy_rig");
         player = GameObject.Find("/Player/Cha_Knight");
         InitializeAnimator();
         InitializeMovement();
@@ -26,33 +25,42 @@ public partial class TinyZombie_Controller : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (zombie == null)
-        {
-            zombie = GameObject.Find("/Enemy/TinyZombie/mummy_rig");
-            navAgent = zombie.GetComponent<NavMeshAgent>();
-            frameOfHealthBar = GameObject.Find("/Enemy/TinyZombie/HealthBar");
-            healthBar = GameObject.Find("/Enemy/TinyZombie/HealthBar/HealthBackground/Health");
-        }
+        //if (zombie == null)
+        //{
+        //    zombie = GameObject.Find("/Enemy/TinyZombie/mummy_rig");
+        //    navAgent = zombie.GetComponent<NavMeshAgent>();
+        //    frameOfHealthBar = GameObject.Find("/Enemy/TinyZombie/HealthBar");
+        //    healthBar = GameObject.Find("/Enemy/TinyZombie/HealthBar/HealthBackground/Health");
+        //}
 
-        if (GetAttackRange()<DistanceFromTarget()&& DistanceFromTarget()<7)
+        if (DistanceFromTarget() > GetDetectRange())
         {
-            MoveToTargetObject();
-            SetStatusOfAttack(false);
-            if(DistanceFromTarget() <=GetAttackRange())
-            {
-                StopMovement();
-                AttackTargetObject();
-            }
+            StopMovement();
         }
-        else if(DistanceFromTarget()<=GetAttackRange())
+        else if(DistanceFromTarget() <= GetAttackRange())
         {
             StopMovement();
             AttackTargetObject();
         }
-        else if(DistanceFromTarget() >7)
+        else
         {
-            StopMovement();
-        }
+            MoveToTargetObject();
+            SetStatusOfAttack(false);
+            //if (DistanceFromTarget() <= GetAttackRange())
+            //{
+            //    StopMovement();
+            //    AttackTargetObject();
+            //}
+        }        
         MoveHealthBarAlongZombie();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Range" && other.gameObject.transform.parent.tag == "Player")
+        {
+            DecreaseHealth(other.gameObject.transform.parent.GetComponent<Player_Controller>().GetPlayerDamage());
+        }
+            
     }
 }

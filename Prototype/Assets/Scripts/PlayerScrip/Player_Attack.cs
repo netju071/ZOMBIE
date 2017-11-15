@@ -2,15 +2,14 @@
 
 public partial class Player_Controller : MonoBehaviour
 {
+    private GameObject attackResource;
     private float attackRange, nextTime, attackInterval, playerDamage;
-    private bool beingAttacked;
 
     private void InitializeAttack()
     {
         SetAttackRange(2.0f);
-        SetAttackInterval(1.0f);
-        SetPlayerDamage(20f);
-        SetStatusOfBeingAttacked(false);
+        SetAttackInterval(2.0f);
+        SetPlayerDamage(10f);
     }
     private void SetAttackRange(float value)
     {
@@ -20,17 +19,13 @@ public partial class Player_Controller : MonoBehaviour
     {
         attackInterval = value;
     }
-    private void SetPlayerDamage(float value)
-    {
-        playerDamage = value;
-    }
     private void SetNextTime(float value)
     {
         nextTime = value;
     }
-    public void SetStatusOfBeingAttacked(bool status)
+    private void SetPlayerDamage(float value)
     {
-        beingAttacked = status;
+        playerDamage = value;
     }
     public float GetAttackRange()
     {
@@ -40,19 +35,14 @@ public partial class Player_Controller : MonoBehaviour
     {
         return attackInterval;
     }
-    public float GetPlayerDamage()
-    {
-        return playerDamage;
-    }
     public float GetNextTime()
     {
         return nextTime;
     }
-    public bool GetStatusOfBeingAttacked()
+    public float GetPlayerDamage()
     {
-        return beingAttacked;
+        return playerDamage;
     }
-    
     private void AttackTargetObject()
     {
         SetStatusOfAttack(true);
@@ -61,24 +51,24 @@ public partial class Player_Controller : MonoBehaviour
         if (targetObject == null)
             SetStatusOfAttack(false);
     }
-
-    public void CreateCollider()
+    
+    public void CreateAttackResource()
     {
         switch (GetCurWeaponType())
         {
             case 1:
-                Instantiate(sword_range, player.transform.position, player.transform.rotation);
+                attackResource = Instantiate(sword_range, player.transform.position, player.transform.rotation);
                 break;
 
             case 2:
-                Instantiate(arrow, player.transform.position, player.transform.rotation);
+                attackResource = Instantiate(arrow, player.transform.position, player.transform.rotation);
                 break;
             default:
                 Debug.Log("[경고]: CurWeaponType값이 범위에서 벗어났습니다.");
                 break;
         }
+        attackResource.transform.parent = gameObject.transform;
     }
-
     public void CoolDown()
     {
         SetStatusOfCool(true);

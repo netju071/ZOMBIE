@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 public partial class TinyZombie_Controller : MonoBehaviour
 {
-    private float attackRange, nextTime, attackInterval,TinyZombieDamage;
-    GameObject zombieRange;
-    private bool beingAttacked;
+    private float attackRange, detectRange, nextTime, attackInterval,TinyZombieDamage;
+    private GameObject zombieRange, attackResource;
+
     private void InitializeAttack()
     {
         zombieRange = Resources.Load<GameObject>("Create/Zombie_Range");
         SetAttackRange(1.5f);
+        SetDetectRange(7.0f);
         SetTinyZombieDamage(5);
         SetAttackInterval(1.0f);
     }
@@ -15,25 +16,29 @@ public partial class TinyZombie_Controller : MonoBehaviour
     {
         attackRange = value;
     }
+    private void SetDetectRange(float value)
+    {
+        detectRange = value;
+    }
     private void SetAttackInterval(float value)
     {
         attackInterval = value;
-    }
-    private void SetTinyZombieDamage(float value)
-    {
-        TinyZombieDamage = value;
     }
     private void SetNextTime(float value)
     {
         nextTime = value;
     }
-    public void SetStatusOfBeingAttacked(bool status)
+    private void SetTinyZombieDamage(float value)
     {
-        beingAttacked = status;
+        TinyZombieDamage = value;
     }
     public float GetAttackRange()
     {
         return attackRange;
+    }
+    public float GetDetectRange()
+    {
+        return detectRange;
     }
     public float GetAttackInterval()
     {
@@ -47,24 +52,22 @@ public partial class TinyZombie_Controller : MonoBehaviour
     {
         return TinyZombieDamage;
     }
-    public bool GetStatusOfBeingAttacked()
-    {
-        return beingAttacked;
-    }
     private void AttackTargetObject()
     {
         SetStatusOfAttack(true);
         zombie.transform.LookAt(new Vector3(player.transform.position.x, zombie.transform.position.y, player.transform.position.z));
         CoolUp();
-
     }
-
+    public void CreateAttackResource()
+    {
+        attackResource = Instantiate(zombieRange, zombie.transform.position, zombie.transform.rotation);
+        attackResource.transform.parent = gameObject.transform;
+    }
     public void CoolDown()
     {
         SetStatusOfCool(true);
         nextTime = Time.time + attackInterval;
     }
-
     private void CoolUp()
     {
         if (nextTime <= Time.time)
@@ -72,9 +75,4 @@ public partial class TinyZombie_Controller : MonoBehaviour
             SetStatusOfCool(false);
         }
     }
-    public void CreateCollider()
-    {
-        Instantiate(zombieRange, zombie.transform.position, zombie.transform.rotation);
-    }
-
 }
