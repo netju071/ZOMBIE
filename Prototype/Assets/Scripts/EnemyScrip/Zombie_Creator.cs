@@ -28,7 +28,7 @@ public class Zombie_Creator : MonoBehaviour
 
     private void InitializeTinyZombie()
     {
-        maxNumTinyZombie = 4;
+        maxNumTinyZombie = 10;
         numTinyZombie = 0;
         tinyZombie = Resources.Load<GameObject>("Create/TinyZombie");
         player= GameObject.Find("/Player/Cha_Knight");

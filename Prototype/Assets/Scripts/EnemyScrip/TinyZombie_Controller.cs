@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
+
 public partial class TinyZombie_Controller : MonoBehaviour
 {
     private GameObject zombie;
@@ -44,7 +44,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
 
         if (GetCurrentHealth() <= 0)
         {
-            //GameObject.Find("/EventSystem").GetComponent<MissionWindow>().count += 1;
+            GameObject.Find("/Main Camera").GetComponent<MissionWindow>().IncreaseNumberOfDyingZombie();
             GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().CreateFireFiles(new Vector3(zombie.transform.position.x, zombie.transform.position.y + 2.08f, zombie.transform.position.z - 1.08f));
             GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().DecreaseNumberOfTinyZombie();
             Destroy(gameObject);
