@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Attack_Range : MonoBehaviour {
+public class AttackRange : MonoBehaviour {
 
     private float delTime;
 

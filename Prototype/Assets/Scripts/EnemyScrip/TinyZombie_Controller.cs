@@ -6,10 +6,10 @@ public partial class TinyZombie_Controller : MonoBehaviour
     private GameObject player;
     private bool isCollider;
     // Use this for initialization
-    private void Awake()
+    void Start()
     {
-        //zombie = GameObject.Find("/Enemy/TinyZombie/mummy_rig");
-        zombie = GameObject.Find("/Enemy/" + gameObject.name + "/mummy_rig");
+        zombie = transform.Find("mummy_rig").gameObject;
+        GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().IncreaseNumberOfTinyZombie();
         player = GameObject.Find("/Player/Cha_Knight");
         InitializeAnimator();
         InitializeMovement();
@@ -17,22 +17,10 @@ public partial class TinyZombie_Controller : MonoBehaviour
         InitializeHealth();
         isCollider = false;
     }
-    public float DistanceFromTarget()
-    {
-        return Vector3.Distance(new Vector3(zombie.transform.position.x, 0, zombie.transform.position.z), new Vector3(player.transform.position.x, 0, player.transform.position.z));
-    }
-
+ 
     // Update is called once per frame
     private void Update()
     {
-        //if (zombie == null)
-        //{
-        //    zombie = GameObject.Find("/Enemy/TinyZombie/mummy_rig");
-        //    navAgent = zombie.GetComponent<NavMeshAgent>();
-        //    frameOfHealthBar = GameObject.Find("/Enemy/TinyZombie/HealthBar");
-        //    healthBar = GameObject.Find("/Enemy/TinyZombie/HealthBar/HealthBackground/Health");
-        //}
-
         if (DistanceFromTarget() > GetDetectRange())
         {
             StopMovement();
@@ -53,6 +41,14 @@ public partial class TinyZombie_Controller : MonoBehaviour
             //}
         }        
         MoveHealthBarAlongZombie();
+
+        if (GetCurrentHealth() <= 0)
+        {
+            //GameObject.Find("/EventSystem").GetComponent<MissionWindow>().count += 1;
+            GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().CreateFireFiles(new Vector3(zombie.transform.position.x, zombie.transform.position.y + 2.08f, zombie.transform.position.z - 1.08f));
+            GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().DecreaseNumberOfTinyZombie();
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,5 +58,10 @@ public partial class TinyZombie_Controller : MonoBehaviour
             DecreaseHealth(other.gameObject.transform.parent.GetComponent<Player_Controller>().GetPlayerDamage());
         }
             
+    }
+
+    public float DistanceFromTarget()
+    {
+        return Vector3.Distance(new Vector3(zombie.transform.position.x, 0, zombie.transform.position.z), new Vector3(player.transform.position.x, 0, player.transform.position.z));
     }
 }

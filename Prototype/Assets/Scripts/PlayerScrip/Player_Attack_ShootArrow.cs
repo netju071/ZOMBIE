@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Shoot_Arrow : MonoBehaviour {
+public class Player_Attack_ShootArrow : MonoBehaviour {
 
     private float arrowSpeed, delTime;
 

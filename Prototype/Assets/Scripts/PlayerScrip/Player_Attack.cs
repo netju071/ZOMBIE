@@ -9,7 +9,7 @@ public partial class Player_Controller : MonoBehaviour
     {
         SetAttackRange(2.0f);
         SetAttackInterval(2.0f);
-        SetPlayerDamage(10f);
+        SetPlayerDamage(20.0f);
     }
     private void SetAttackRange(float value)
     {
