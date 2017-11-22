@@ -7,9 +7,9 @@ public partial class Player_Controller : MonoBehaviour
 
     private void InitializeAttack()
     {
-        SetAttackRange(2.0f);
-        SetAttackInterval(2.0f);
-        SetPlayerDamage(10f);
+        SetAttackRange(sword.GetComponent<Weapon_Sword>().GetAttackRange());
+        SetAttackInterval(sword.GetComponent<Weapon_Sword>().GetAttackSpeed());
+        SetPlayerDamage(sword.GetComponent<Weapon_Sword>().GetAttackDamage());
     }
     private void SetAttackRange(float value)
     {
@@ -42,6 +42,22 @@ public partial class Player_Controller : MonoBehaviour
     public float GetPlayerDamage()
     {
         return playerDamage;
+    }
+    private void ChangeStats(int curWeapon)
+    {
+        switch (curWeapon)
+        {
+            case 1:
+                SetAttackRange(sword.GetComponent<Weapon_Sword>().GetAttackRange());
+                SetAttackInterval(sword.GetComponent<Weapon_Sword>().GetAttackSpeed());
+                SetPlayerDamage(sword.GetComponent<Weapon_Sword>().GetAttackDamage());
+                break;
+            case 2:
+                SetAttackRange(bow.GetComponent<Weapon_Arrow>().GetAttackRange());
+                SetAttackInterval(bow.GetComponent<Weapon_Arrow>().GetAttackSpeed());
+                SetPlayerDamage(bow.GetComponent<Weapon_Arrow>().GetAttackDamage());
+                break;
+        }
     }
     private void AttackTargetObject()
     {

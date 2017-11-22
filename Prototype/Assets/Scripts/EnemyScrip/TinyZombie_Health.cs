@@ -4,15 +4,13 @@ public partial class TinyZombie_Controller : MonoBehaviour
 {
     private GameObject frameOfHealthBar;
     private GameObject healthBar;
-    private GameObject respawn;
     private float maxHealth, curHealth;
     private float dist_y;
 
     private void InitializeHealth()
     {
-        frameOfHealthBar = GameObject.Find("/Enemy/" + gameObject.name + "/HealthBar");
-        healthBar = GameObject.Find("/Enemy/" + gameObject.name + "/HealthBar/HealthBackground/Health");
-        respawn = Resources.Load<GameObject>("Create/TinyZombie");
+        frameOfHealthBar = transform.Find("HealthBar").gameObject;
+        healthBar = transform.Find("HealthBar/HealthBackground/Health").gameObject;
         SetMaxHealth(100f);
         SetCurrentHealth(GetMaxHealth());
         dist_y = 2.15f;
@@ -46,14 +44,5 @@ public partial class TinyZombie_Controller : MonoBehaviour
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
         SetHealthBar(GetCurrentHealth() / GetMaxHealth());
-        if (GetCurrentHealth() == 0)
-        {
-            //GameObject.Find("/EventSystem").GetComponent<MissionWindow>().count += 1;
-            Destroy(gameObject);
-            //GameObject newZombie = (GameObject)Instantiate(respawn, respawn.transform.position, Quaternion.identity);
-            //newZombie.name = "TinyZombie";
-            //newZombie.transform.parent = GameObject.Find("/Enemy").transform;
-            
-        }
     }
 }

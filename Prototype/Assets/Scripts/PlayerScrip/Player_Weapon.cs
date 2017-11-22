@@ -42,5 +42,6 @@ public partial class Player_Controller : MonoBehaviour
             SetCurWeaponType(2);
             SetAttackRange(8.0f);
         }
+        ChangeStats(GetCurWeaponType());
     }
 }
