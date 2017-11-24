@@ -10,7 +10,7 @@ public class Weapon_Sword : Weapon
         attackDamage = 15f;
         attackRange = 2f;
         exp = 0;
-        maxExp = 0;
+        maxExp = 10;
     }
 
     protected override void WeaponLevelUp()

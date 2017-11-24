@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour {
-    protected float attackSpeed, 
+    public float attackSpeed, 
         attackDamage, 
         attackRange, 
         exp, maxExp;
@@ -31,8 +31,9 @@ public abstract class Weapon : MonoBehaviour {
 
     protected abstract void WeaponLevelUp();
 
-    protected void IncreaseExp(float earned)
+    public void IncreaseExp(float earned)
     {
+        Debug.Log("호출!");
         exp += earned;
         if(exp>=maxExp)
         {

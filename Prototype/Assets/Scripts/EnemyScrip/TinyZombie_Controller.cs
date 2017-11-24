@@ -5,6 +5,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
     private GameObject zombie;
     private GameObject player;
     private bool isCollider;
+    private float exp=5f;
     // Use this for initialization
     void Start()
     {
@@ -47,7 +48,9 @@ public partial class TinyZombie_Controller : MonoBehaviour
             //GameObject.Find("/EventSystem").GetComponent<MissionWindow>().count += 1;
             GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().CreateFireFiles(new Vector3(zombie.transform.position.x, zombie.transform.position.y + 2.08f, zombie.transform.position.z - 1.08f));
             GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().DecreaseNumberOfTinyZombie();
+            ReceiveExp(GameObject.Find("/Player").GetComponent<Player_Controller>().GetCurWeaponType());
             Destroy(gameObject);
+            
         }
     }
 
@@ -63,5 +66,27 @@ public partial class TinyZombie_Controller : MonoBehaviour
     public float DistanceFromTarget()
     {
         return Vector3.Distance(new Vector3(zombie.transform.position.x, 0, zombie.transform.position.z), new Vector3(player.transform.position.x, 0, player.transform.position.z));
+    }
+
+    private void ReceiveExp(int WeaponType)
+    {
+        switch (WeaponType)
+        {
+            case 1:
+                Debug.Log("칼 경험치!");
+                GameObject.Find("/Player/Cha_Knight/Group Locator/Sword02").GetComponent<Weapon_Sword>().IncreaseExp(exp);
+                break;
+
+            case 2:
+                Debug.Log("활 경험치!");
+                GameObject.Find("/Player/Cha_Knight/Group Locator/Root/Skeleton_Root/Skeleton_Spine01/Skeleton_Spine02/Skeleton_Arm_R/Skeleton_ForeArm_R/Skeleton_Hand_R/bow").GetComponent<Weapon_Sword>().IncreaseExp(exp);
+                break;
+
+            default:
+                Debug.Log("[경고]: CurWeaponType값이 범위에서 벗어났습니다.");
+                break;
+
+        }
+
     }
 }
