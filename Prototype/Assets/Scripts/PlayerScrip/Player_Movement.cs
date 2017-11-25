@@ -14,7 +14,7 @@ public partial class Player_Controller : MonoBehaviour
         SetStatusOfMovement(true);
         navAgent.destination = targetPosition;
 
-        if (DistanceFromTarget() == 0)
+        if (DistanceFromTargetObject() == 0)
         {
             StopMovement();
         }

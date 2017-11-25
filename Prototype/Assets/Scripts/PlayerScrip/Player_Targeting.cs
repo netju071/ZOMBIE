@@ -31,7 +31,7 @@ public partial class Player_Controller : MonoBehaviour
         targetObject = null;
         targetPosition = Vector3.zero;
     }
-    public float DistanceFromTarget()
+    public float DistanceFromTargetObject()
     {
         return Vector3.Distance(new Vector3(player.transform.position.x, 0, player.transform.position.z), new Vector3(targetPosition.x, 0, targetPosition.z));
     }

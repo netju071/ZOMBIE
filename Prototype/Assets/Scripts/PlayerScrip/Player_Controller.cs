@@ -3,6 +3,7 @@
 public partial class Player_Controller : MonoBehaviour
 {
     private GameObject player;
+
     // Use this for initialization
     private void Awake()
     {
@@ -38,7 +39,7 @@ public partial class Player_Controller : MonoBehaviour
 
             Targeting();
 
-            if(GetTargetObjectTag() == "Enemy" && DistanceFromTarget() <= GetAttackRange())
+            if(GetTargetObjectTag() == "Enemy" && DistanceFromTargetObject() <= GetAttackRange())
             {
                 AttackTargetObject();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
             }
@@ -50,7 +51,7 @@ public partial class Player_Controller : MonoBehaviour
 
         if (GetStatusOfMovement())
         {
-            if (GetTargetObjectTag() == "Enemy" && DistanceFromTarget() <= GetAttackRange())
+            if (GetTargetObjectTag() == "Enemy" && DistanceFromTargetObject() <= GetAttackRange())
             {
                 StopMovement();
                 AttackTargetObject();

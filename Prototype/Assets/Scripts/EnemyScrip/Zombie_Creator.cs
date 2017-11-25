@@ -2,7 +2,6 @@
 
 public class Zombie_Creator : MonoBehaviour
 {
-
     private GameObject tinyZombie;
     private GameObject player;
     private GameObject portal;
@@ -28,7 +27,7 @@ public class Zombie_Creator : MonoBehaviour
 
     private void InitializeTinyZombie()
     {
-        maxNumTinyZombie = 10;
+        maxNumTinyZombie = 8;
         numTinyZombie = 0;
         tinyZombie = Resources.Load<GameObject>("Create/TinyZombie");
         player= GameObject.Find("/Player/Cha_Knight");
@@ -51,7 +50,7 @@ public class Zombie_Creator : MonoBehaviour
     {
         Instantiate(fireFiles, createdPos, fireFiles.transform.rotation);
     }
-    private Vector3 RandomPosition()
+    public Vector3 RandomPosition()
     {
         //float dist = 9.0f;
         //Vector3 randPos;
