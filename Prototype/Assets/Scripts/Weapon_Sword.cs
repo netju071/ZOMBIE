@@ -6,7 +6,7 @@ public class Weapon_Sword : Weapon
 {
     protected override void ResetStat()
     {
-        attackSpeed = 1.5f;
+        attackSpeed = 1f;
         attackDamage = 15f;
         attackRange = 2f;
         exp = 0;
@@ -15,7 +15,7 @@ public class Weapon_Sword : Weapon
 
     protected override void WeaponLevelUp()
     {
-        attackSpeed += 0.3f;
+        attackSpeed -= attackSpeed / 5;
         attackDamage += 4f;
     }
 }

@@ -3,18 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour {
-    public float attackSpeed, 
-        attackDamage, 
-        attackRange, 
+    public float attackSpeed,
+        attackDamage,
+        attackRange,
         exp, maxExp;
 
-	void Start () {
+    void Start() {
         ResetStat();
-	}
-	
+    }
+
     protected abstract void ResetStat();
 
-	public float GetAttackSpeed()
+    public void SetAttackSpeed(float value)
+    {
+        attackSpeed = value;
+    }
+
+    public void SetAttackDamage(float value)
+    {
+        attackDamage = value;
+    }
+
+    public void SetAttackRange(float value)
+    {
+        attackRange = value;
+    }
+
+    public float GetAttackSpeed()
     {
         return attackSpeed;
     }
@@ -33,7 +48,6 @@ public abstract class Weapon : MonoBehaviour {
 
     public void IncreaseExp(float earned)
     {
-        Debug.Log("호출!");
         exp += earned;
         if(exp>=maxExp)
         {

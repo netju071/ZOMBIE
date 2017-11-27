@@ -5,7 +5,6 @@ public partial class TinyZombie_Controller : MonoBehaviour
     private GameObject zombie;
     private GameObject player;
     private bool isCollider;
-    private float exp=5f;
     // Use this for initialization
     void Start()
     {
@@ -16,6 +15,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
         InitializeMovement();
         InitializeAttack();
         InitializeHealth();
+        InitializeExp();
         isCollider = false;
     }
  
@@ -74,12 +74,12 @@ public partial class TinyZombie_Controller : MonoBehaviour
         {
             case 1:
                 Debug.Log("칼 경험치!");
-                GameObject.Find("/Player/Cha_Knight/Group Locator/Sword02").GetComponent<Weapon_Sword>().IncreaseExp(exp);
+                GameObject.Find("/Player/Cha_Knight/Group Locator/Sword02").GetComponent<Weapon_Sword>().IncreaseExp(GetExp());
                 break;
 
             case 2:
                 Debug.Log("활 경험치!");
-                GameObject.Find("/Player/Cha_Knight/Group Locator/Root/Skeleton_Root/Skeleton_Spine01/Skeleton_Spine02/Skeleton_Arm_R/Skeleton_ForeArm_R/Skeleton_Hand_R/bow").GetComponent<Weapon_Sword>().IncreaseExp(exp);
+                GameObject.Find("/Player/Cha_Knight/Group Locator/Root/Skeleton_Root/Skeleton_Spine01/Skeleton_Spine02/Skeleton_Arm_R/Skeleton_ForeArm_R/Skeleton_Hand_R/bow").GetComponent<Weapon_Arrow>().IncreaseExp(GetExp());
                 break;
 
             default:

@@ -5,16 +5,16 @@ using UnityEngine;
 public class Weapon_Arrow : Weapon {
     protected override void ResetStat()
     {
-        attackSpeed = 1.5f;
+        attackSpeed = 1f;
         attackDamage = 10f;
         attackRange = 8f;
         exp = 0;
-        maxExp = 0;
+        maxExp = 10f;
     }
 
     protected override void WeaponLevelUp()
     {
-        attackSpeed += 0.2f;
+        attackSpeed -= attackSpeed / 5;
         attackDamage += 3f;
         attackRange += 0.5f;
     }
