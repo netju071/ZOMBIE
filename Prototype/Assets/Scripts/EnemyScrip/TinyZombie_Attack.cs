@@ -7,6 +7,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
     private void InitializeAttack()
     {
         zombieRange = Resources.Load<GameObject>("Create/Zombie_Range");
+        SetStatusOfTracing(false);
         SetAttackRange(1.5f);
         SetDetectRange(7.0f);
         SetTinyZombieDamage(5);

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
+
 public partial class TinyZombie_Controller : MonoBehaviour
 {
     private GameObject zombie;
@@ -22,35 +22,60 @@ public partial class TinyZombie_Controller : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (DistanceFromTarget() > GetDetectRange())
+        if (GetStatusOfTracing() == true)
         {
-            StopMovement();
-        }
-        else if(DistanceFromTarget() <= GetAttackRange())
-        {
-            StopMovement();
-            AttackTargetObject();
+            SetTargetPosition(player.transform.position);
+
+            if (DistanceFromPosition(GetTargetPosition()) > GetDetectRange())
+            {
+                StopMovement();
+                SetStatusOfTracing(false);
+                SetTimeToMove();
+            }
+            else if (DistanceFromPosition(GetTargetPosition()) <= GetAttackRange())
+            {
+                StopMovement();
+                AttackTargetObject();
+            }
+            else
+            {
+                SetStatusOfAttack(false);
+                MoveToTarget();
+            }
         }
         else
         {
-            MoveToTargetObject();
-            SetStatusOfAttack(false);
-            //if (DistanceFromTarget() <= GetAttackRange())
-            //{
-            //    StopMovement();
-            //    AttackTargetObject();
-            //}
-        }        
+            if (DistanceFromPosition(player.transform.position) <= GetDetectRange())
+            {
+                SetStatusOfTracing(true);
+                SetTargetPosition(player.transform.position);
+                MoveToTarget();
+            }
+            else if(GetStatusOfMovement() == true)
+            {
+                if(GetTimeToStop() <= Time.time)
+                {
+                    StopMovement();
+                    SetTimeToMove();
+                }
+                else
+                {
+                    MoveToTarget();
+                }
+            }
+            else if(GetTimeToMove() <= Time.time)
+            {
+                SetTargetPosition(RandomPosition());
+                MoveToTarget();
+                SetTimeToStop();
+            }
+        }
+
         MoveHealthBarAlongZombie();
 
         if (GetCurrentHealth() <= 0)
         {
-            //GameObject.Find("/EventSystem").GetComponent<MissionWindow>().count += 1;
-            GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().CreateFireFiles(new Vector3(zombie.transform.position.x, zombie.transform.position.y + 2.08f, zombie.transform.position.z - 1.08f));
-            GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().DecreaseNumberOfTinyZombie();
-            ReceiveExp(GameObject.Find("/Player").GetComponent<Player_Controller>().GetCurWeaponType());
-            Destroy(gameObject);
-            
+            DestroyZombie();
         }
     }
 
@@ -62,7 +87,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
         }
             
     }
-
+    
     public float DistanceFromTarget()
     {
         return Vector3.Distance(new Vector3(zombie.transform.position.x, 0, zombie.transform.position.z), new Vector3(player.transform.position.x, 0, player.transform.position.z));
@@ -87,6 +112,13 @@ public partial class TinyZombie_Controller : MonoBehaviour
                 break;
 
         }
+    }
 
+    private void DestroyZombie()
+    {
+        GameObject.Find("/Main Camera").GetComponent<MissionWindow>().IncreaseNumberOfDyingZombie();
+        GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().CreateFireFiles(new Vector3(zombie.transform.position.x, zombie.transform.position.y + 2.08f, zombie.transform.position.z - 1.08f));
+        GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().DecreaseNumberOfTinyZombie();
+        Destroy(gameObject);
     }
 }
