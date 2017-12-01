@@ -119,6 +119,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
         GameObject.Find("/Main Camera").GetComponent<MissionWindow>().IncreaseNumberOfDyingZombie();
         GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().CreateFireFiles(new Vector3(zombie.transform.position.x, zombie.transform.position.y + 2.08f, zombie.transform.position.z - 1.08f));
         GameObject.Find("/Enemy").GetComponent<Zombie_Creator>().DecreaseNumberOfTinyZombie();
+        ReceiveExp(GameObject.Find("/Player").GetComponent<Player_Controller>().GetCurWeaponType());
         Destroy(gameObject);
     }
 }
