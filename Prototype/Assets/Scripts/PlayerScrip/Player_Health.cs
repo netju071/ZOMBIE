@@ -45,7 +45,14 @@ public partial class Player_Controller : MonoBehaviour
     }
     private void DecreaseHealth(float damage)
     {
-        SetCurrentHealth(GetCurrentHealth() - damage);
+        if(GetCurrentHealth()<=0)
+        {
+            return;
+        }
+
+        float newHealth = (GetCurrentHealth() > damage ? GetCurrentHealth() - damage : 0);
+        
+        SetCurrentHealth(newHealth);
         SetHealthBar(GetCurrentHealth()/GetMaxHealth());
     }
 }

@@ -9,6 +9,7 @@ public partial class Player_Controller : MonoBehaviour
         SetStatusOfMovement(false);
         SetStatusOfAttack(false);
         SetStatusOfCool(false);
+        SetStatusOfDie(false);
     }
     public void SetStatusOfMovement(bool status)
     {
@@ -22,6 +23,10 @@ public partial class Player_Controller : MonoBehaviour
     {
         anim.SetBool("isCool", status);
     }
+    public void SetStatusOfDie(bool status)
+    {
+        anim.SetBool("isDie", status);
+    }
 
     public bool GetStatusOfMovement()
     {
@@ -32,6 +37,10 @@ public partial class Player_Controller : MonoBehaviour
         return anim.GetBool("isAttacking");
     }
     public bool GetStatusOfCool()
+    {
+        return anim.GetBool("isCool");
+    }
+    public bool GetStatusOfDie()
     {
         return anim.GetBool("isCool");
     }
