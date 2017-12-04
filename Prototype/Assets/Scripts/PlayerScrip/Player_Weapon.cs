@@ -2,7 +2,7 @@
 
 public partial class Player_Controller : MonoBehaviour
 {
-    private GameObject bow, sword, arrow, sword_range;
+    public GameObject bow, sword, arrow, sword_range;
     private int curWeapon;
     private void InitializeWeapon()
     {
@@ -42,5 +42,6 @@ public partial class Player_Controller : MonoBehaviour
             SetCurWeaponType(2);
             SetAttackRange(8.0f);
         }
+        ChangeStats(GetCurWeaponType());
     }
 }
