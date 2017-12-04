@@ -20,11 +20,11 @@ public class Player_Attack_ShootArrow : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-    private void SetArrowSpeed(float value)
+    public void SetArrowSpeed(float value)
     {
         arrowSpeed = value;
     }
-    private void SetDeleteTime(float value)
+    public void SetDeleteTime(float value)
     {
         delTime = Time.time + value;
     }

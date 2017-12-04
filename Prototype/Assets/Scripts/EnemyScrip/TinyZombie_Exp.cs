@@ -6,16 +6,15 @@ public partial class TinyZombie_Controller : MonoBehaviour
 
     private void InitializeExp()
     {
-        exp = 5f;
-    }
-
-    public float GetExp()
-    {
-        return exp;
+        SetExp(5.0f);
     }
 
     public void SetExp(float value)
     {
         exp = value;
+    }
+    public float GetExp()
+    {
+        return exp;
     }
 }

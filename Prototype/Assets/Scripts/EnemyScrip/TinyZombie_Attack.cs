@@ -13,23 +13,23 @@ public partial class TinyZombie_Controller : MonoBehaviour
         SetTinyZombieDamage(5);
         SetAttackInterval(1.0f);
     }
-    private void SetAttackRange(float value)
+    public void SetAttackRange(float value)
     {
         attackRange = value;
     }
-    private void SetDetectRange(float value)
+    public void SetDetectRange(float value)
     {
         detectRange = value;
     }
-    private void SetAttackInterval(float value)
+    public void SetAttackInterval(float value)
     {
         attackInterval = value;
     }
-    private void SetNextTime(float value)
+    public void SetNextTime(float value)
     {
         nextTime = value;
     }
-    private void SetTinyZombieDamage(float value)
+    public void SetTinyZombieDamage(float value)
     {
         TinyZombieDamage = value;
     }

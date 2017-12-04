@@ -15,8 +15,8 @@ public class TinyZombie_Animator_Attack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.gameObject.GetComponent<TinyZombie_Controller>().CreateAttackResource();
         animator.gameObject.GetComponent<TinyZombie_Controller>().CoolDown();
+        animator.gameObject.GetComponent<TinyZombie_Controller>().CreateAttackResource();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

@@ -7,23 +7,23 @@ public partial class Player_Controller : MonoBehaviour
 
     private void InitializeAttack()
     {
-        SetAttackRange(sword.GetComponent<Weapon_Sword>().GetAttackRange());
-        SetAttackInterval(sword.GetComponent<Weapon_Sword>().GetAttackSpeed());
-        SetPlayerDamage(sword.GetComponent<Weapon_Sword>().GetAttackDamage());
+        SetAttackRange(sword.GetComponent<Weapon_Sword>().GetRange());
+        SetAttackInterval(sword.GetComponent<Weapon_Sword>().GetSpeed());
+        SetAttackDamage(sword.GetComponent<Weapon_Sword>().GetDamage());
     }
-    private void SetAttackRange(float value)
+    public void SetAttackRange(float value)
     {
         attackRange = value;
     }
-    private void SetAttackInterval(float value)
+    public void SetAttackInterval(float value)
     {
         attackInterval = value;
     }
-    private void SetNextTime(float value)
+    public void SetNextTime(float value)
     {
         nextTime = value;
     }
-    private void SetPlayerDamage(float value)
+    public void SetAttackDamage(float value)
     {
         playerDamage = value;
     }
@@ -39,7 +39,7 @@ public partial class Player_Controller : MonoBehaviour
     {
         return nextTime;
     }
-    public float GetPlayerDamage()
+    public float GetAttackDamage()
     {
         return playerDamage;
     }
@@ -48,14 +48,14 @@ public partial class Player_Controller : MonoBehaviour
         switch (curWeapon)
         {
             case 1:
-                SetAttackRange(sword.GetComponent<Weapon_Sword>().GetAttackRange());
-                SetAttackInterval(sword.GetComponent<Weapon_Sword>().GetAttackSpeed());
-                SetPlayerDamage(sword.GetComponent<Weapon_Sword>().GetAttackDamage());
+                SetAttackRange(sword.GetComponent<Weapon_Sword>().GetRange());
+                SetAttackInterval(sword.GetComponent<Weapon_Sword>().GetSpeed());
+                SetAttackDamage(sword.GetComponent<Weapon_Sword>().GetDamage());
                 break;
             case 2:
-                SetAttackRange(bow.GetComponent<Weapon_Arrow>().GetAttackRange());
-                SetAttackInterval(bow.GetComponent<Weapon_Arrow>().GetAttackSpeed());
-                SetPlayerDamage(bow.GetComponent<Weapon_Arrow>().GetAttackDamage());
+                SetAttackRange(bow.GetComponent<Weapon_Bow>().GetRange());
+                SetAttackInterval(bow.GetComponent<Weapon_Bow>().GetSpeed());
+                SetAttackDamage(bow.GetComponent<Weapon_Bow>().GetDamage());
                 break;
         }
     }

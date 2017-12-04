@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ButtonManagement : MonoBehaviour {
@@ -8,5 +6,4 @@ public class ButtonManagement : MonoBehaviour {
     {
         SceneManager.LoadScene(newGameLevel);
     }
-
 }

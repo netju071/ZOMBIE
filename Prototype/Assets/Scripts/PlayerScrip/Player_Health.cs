@@ -19,11 +19,11 @@ public partial class Player_Controller : MonoBehaviour
         dist_y = 3.62f;
         dist_z = -0.02f;
     }
-    private void SetMaxHealth(float value)
+    public void SetMaxHealth(float value)
     {
         maxHealth = value;
     }
-    private void SetCurrentHealth(float value)
+    public void SetCurrentHealth(float value)
     {
         curHealth = value;
     }
@@ -43,7 +43,7 @@ public partial class Player_Controller : MonoBehaviour
     {
         frameOfHealthBar.transform.position = new Vector3(player.transform.position.x + dist_x, player.transform.position.y + dist_y, player.transform.position.z + dist_z);
     }
-    public void DecreaseHealth(float damage)
+    private void DecreaseHealth(float damage)
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
         SetHealthBar(GetCurrentHealth()/GetMaxHealth());

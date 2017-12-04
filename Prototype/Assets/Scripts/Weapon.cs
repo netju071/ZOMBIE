@@ -1,45 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour {
-    public float attackSpeed,
-        attackDamage,
-        attackRange,
-        exp, maxExp;
+public abstract class Weapon : MonoBehaviour
+{
+    protected float attackSpeed;
+    protected float attackDamage;
+    protected float attackRange;
+    protected float exp, maxExp;
 
-    void Start() {
+    void Start()
+    {
         ResetStat();
     }
 
     protected abstract void ResetStat();
 
-    public void SetAttackSpeed(float value)
+    public void SetSpeed(float value)
     {
         attackSpeed = value;
     }
 
-    public void SetAttackDamage(float value)
+    public void SetDamage(float value)
     {
         attackDamage = value;
     }
 
-    public void SetAttackRange(float value)
+    public void SetRange(float value)
     {
         attackRange = value;
     }
 
-    public float GetAttackSpeed()
+    public float GetSpeed()
     {
         return attackSpeed;
     }
 
-    public float GetAttackDamage()
+    public float GetDamage()
     {
         return attackDamage;
     }
 
-    public float GetAttackRange()
+    public float GetRange()
     {
         return attackRange;
     }

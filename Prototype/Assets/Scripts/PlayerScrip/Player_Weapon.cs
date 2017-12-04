@@ -18,7 +18,7 @@ public partial class Player_Controller : MonoBehaviour
 
         SetCurWeaponType(1);
     }
-    private void SetCurWeaponType(int type)
+    public void SetCurWeaponType(int type)
     {
         curWeapon = type;
     }

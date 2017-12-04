@@ -20,47 +20,47 @@ public partial class TinyZombie_Controller : MonoBehaviour
         SetTimeToMove(0f);
         SetTimeToStop();
     }
-    private void SetMovableTime(float value)
+    public void SetMovableTime(float value)
     {
         movableTime = value;
     }
-    private void SetMovingTimeInterval(float value)
+    public void SetMovingTimeInterval(float value)
     {
         movingTimeInterval = value;
     }
-    private void SetTimeToMove(float value)
+    public void SetTimeToMove(float value)
     {
         timeToMove = value;
     }
-    private void SetTimeToMove()
+    public void SetTimeToMove()
     {
         timeToMove = Time.time + GetMovingTimeInterval();
     }
-    private void SetTimeToStop()
+    public void SetTimeToStop()
     {
         timeToStop = Time.time + GetMovableTime();
     }
-    private void SetTargetPosition(Vector3 pos)
+    public void SetTargetPosition(Vector3 pos)
     {
         targetPos = pos;
     }
-    private float GetMovableTime()
+    public float GetMovableTime()
     {
         return movableTime;
     }
-    private float GetMovingTimeInterval()
+    public float GetMovingTimeInterval()
     {
         return movingTimeInterval;
     }
-    private float GetTimeToMove()
+    public float GetTimeToMove()
     {
         return timeToMove;
     }
-    private float GetTimeToStop()
+    public float GetTimeToStop()
     {
         return timeToStop;
     }
-    private Vector3 GetTargetPosition()
+    public Vector3 GetTargetPosition()
     {
         return targetPos;
     }
@@ -79,11 +79,11 @@ public partial class TinyZombie_Controller : MonoBehaviour
         SetStatusOfMovement(false);
         navAgent.SetDestination(zombie.transform.position);
     }
-    public float DistanceFromPosition(Vector3 pos)
+    private float DistanceFromPosition(Vector3 pos)
     {
         return Vector3.Distance(new Vector3(zombie.transform.position.x, 0, zombie.transform.position.z), new Vector3(pos.x, 0, pos.z));
     }
-    public Vector3 RandomPosition()
+    private Vector3 RandomPosition()
     {
         //float minPosX = -34.94f, maxPosX = 13.5f, minPosZ = -23.26f, maxPosZ = 1.84f;
         //return new Vector3(Random.Range(minPosX, maxPosX), transform.position.y, Random.Range(minPosZ, maxPosZ));

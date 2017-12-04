@@ -4,7 +4,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
 {
     private GameObject zombie;
     private GameObject player;
-    private bool isCollider;
+
     // Use this for initialization
     void Start()
     {
@@ -16,7 +16,6 @@ public partial class TinyZombie_Controller : MonoBehaviour
         InitializeAttack();
         InitializeHealth();
         InitializeExp();
-        isCollider = false;
     }
  
     // Update is called once per frame
@@ -83,12 +82,12 @@ public partial class TinyZombie_Controller : MonoBehaviour
     {
         if (other.gameObject.tag == "Range" && other.gameObject.transform.parent.tag == "Player")
         {
-            DecreaseHealth(other.gameObject.transform.parent.GetComponent<Player_Controller>().GetPlayerDamage());
+            DecreaseHealth(other.gameObject.transform.parent.GetComponent<Player_Controller>().GetAttackDamage());
         }
             
     }
     
-    public float DistanceFromTarget()
+    private float DistanceFromTarget()
     {
         return Vector3.Distance(new Vector3(zombie.transform.position.x, 0, zombie.transform.position.z), new Vector3(player.transform.position.x, 0, player.transform.position.z));
     }
@@ -104,7 +103,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
 
             case 2:
                 Debug.Log("활 경험치!");
-                GameObject.Find("/Player/Cha_Knight/Group Locator/Root/Skeleton_Root/Skeleton_Spine01/Skeleton_Spine02/Skeleton_Arm_R/Skeleton_ForeArm_R/Skeleton_Hand_R/bow").GetComponent<Weapon_Arrow>().IncreaseExp(GetExp());
+                GameObject.Find("/Player/Cha_Knight/Group Locator/Root/Skeleton_Root/Skeleton_Spine01/Skeleton_Spine02/Skeleton_Arm_R/Skeleton_ForeArm_R/Skeleton_Hand_R/bow").GetComponent<Weapon_Bow>().IncreaseExp(GetExp());
                 break;
 
             default:

@@ -5,7 +5,7 @@ public partial class Player_Controller : MonoBehaviour
     private GameObject player;
 
     // Use this for initialization
-    private void Awake()
+    private void Start()
     {
         player = GameObject.Find("/Player/Cha_Knight");
         InitializeAnimator();

@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Weapon_Arrow : Weapon {
+﻿public class Weapon_Bow : Weapon
+{
     protected override void ResetStat()
     {
         attackSpeed = 1f;
         attackDamage = 10f;
-        attackRange = 8f;
+        attackRange = 6f;
         exp = 0;
         maxExp = 10f;
     }

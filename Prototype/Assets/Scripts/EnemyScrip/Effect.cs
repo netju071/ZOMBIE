@@ -19,7 +19,7 @@ public class Effect : MonoBehaviour {
         }
     }
 
-    private void SetDeleteTime(float value)
+    public void SetDeleteTime(float value)
     {
         delTime = Time.time + value;
     }

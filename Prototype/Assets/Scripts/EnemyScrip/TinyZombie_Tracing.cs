@@ -8,7 +8,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
     {
         SetStatusOfTracing(false);
     }
-    private void SetStatusOfTracing(bool status)
+    public void SetStatusOfTracing(bool status)
     {
         isTracing = status;
     }

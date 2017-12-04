@@ -10,15 +10,15 @@ public partial class Player_Controller : MonoBehaviour
         SetStatusOfAttack(false);
         SetStatusOfCool(false);
     }
-    private void SetStatusOfMovement(bool status)
+    public void SetStatusOfMovement(bool status)
     {
         anim.SetBool("isMoving", status);
     }
-    private void SetStatusOfAttack(bool status)
+    public void SetStatusOfAttack(bool status)
     {
         anim.SetBool("isAttacking", status);
     }
-    private void SetStatusOfCool(bool status)
+    public void SetStatusOfCool(bool status)
     {
         anim.SetBool("isCool", status);
     }

@@ -16,11 +16,11 @@ public partial class TinyZombie_Controller : MonoBehaviour
         dist_y = 2.15f;
         
     }
-    private void SetMaxHealth(float value)
+    public void SetMaxHealth(float value)
     {
         maxHealth = value;
     }
-    private void SetCurrentHealth(float value)
+    public void SetCurrentHealth(float value)
     {
         curHealth = value;
     }
@@ -40,7 +40,7 @@ public partial class TinyZombie_Controller : MonoBehaviour
     {
         frameOfHealthBar.transform.position = new Vector3(zombie.transform.position.x, zombie.transform.position.y + dist_y, zombie.transform.position.z);
     }
-    public void DecreaseHealth(float damage)
+    private void DecreaseHealth(float damage)
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
         SetHealthBar(GetCurrentHealth() / GetMaxHealth());
