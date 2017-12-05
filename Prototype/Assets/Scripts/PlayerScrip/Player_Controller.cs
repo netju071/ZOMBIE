@@ -34,7 +34,7 @@ public partial class Player_Controller : MonoBehaviour
             }
             else if (GetStatusOfMovement())
             {
-                StopMovement(); //수정 요망
+                StopMovement();
             }
 
             Targeting();
@@ -77,6 +77,7 @@ public partial class Player_Controller : MonoBehaviour
             if(GetCurrentHealth()<=0)
             {
                 SetStatusOfDie(true);
+                SetStatusOfAttack(true);    //플레이어의 시체가 움직이지 않도록 설정
             }
 
         }
