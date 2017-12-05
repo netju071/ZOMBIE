@@ -42,6 +42,6 @@ public partial class Player_Controller : MonoBehaviour
     }
     public bool GetStatusOfDie()
     {
-        return anim.GetBool("isCool");
+        return anim.GetBool("isDie");
     }
 }

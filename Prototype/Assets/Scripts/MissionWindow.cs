@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class MissionWindow : MonoBehaviour
 {
     private Rect missionWindow;
     private Rect selectWindow;
+    private Rect reStartWindow;
     private string minutes,seconds;
     private int numDyingZombie;
     private int mission;
@@ -62,6 +63,32 @@ public class MissionWindow : MonoBehaviour
         else if (toggle == true)
         {
             missionWindow = GUI.Window(1, new Rect(Screen.width * 0.8f, Screen.height * 0.01f, Screen.width * 0.2f, 100), ShowMission, "Mission");
+        }
+        if (isSelect == false)
+        {
+            Time.timeScale = 0;
+            selectWindow = GUI.Window(0, new Rect(Screen.width * 0.33f, Screen.height * 0.25f, 500, 200), SelectMission, "Select Mission");
+        }
+        if (GameObject.Find("/EventSystem").GetComponent<GameController>().GetStatusOfPause())
+        {
+            GUI.Box(new Rect(Screen.width * 0.35f, Screen.height * 0.15f, 500, 200), "Pause");
+            GUI.skin.textField.fontSize = 20;
+            GUI.skin.textField.alignment = TextAnchor.MiddleCenter;
+        }
+        if (GameObject.Find("/Player").GetComponent<Player_Controller>().GetStatusOfDeath())
+        {
+            selectWindow = GUI.Window(0, new Rect(Screen.width * 0.33f, Screen.height * 0.25f, 500, 200), Restart, "ReTry?");
+        }
+    }
+    private void Restart(int id)
+    {
+        if (GUI.Button(new Rect(selectWindow.width * 0.15f, selectWindow.height * 0.35f, 150, 50), "Yes"))
+        {
+            SceneManager.LoadScene("game");
+        }
+        else if (GUI.Button(new Rect(selectWindow.width * 0.55f, selectWindow.height * 0.35f, 150, 50), "No"))
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
     private void SelectMission(int id)

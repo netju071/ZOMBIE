@@ -8,7 +8,7 @@ public partial class Player_Controller : MonoBehaviour
     private float dist_x;
     private float dist_y;
     private float dist_z;
-
+    private bool isDeath;
     private void InitializeHealth()
     {
         frameOfHealthBar = GameObject.Find("/Player/HealthBar");
@@ -18,6 +18,15 @@ public partial class Player_Controller : MonoBehaviour
         dist_x = -0.03f;
         dist_y = 3.62f;
         dist_z = -0.02f;
+        isDeath = false;
+    }
+    public void SetStatusOfDeath()
+    {
+        isDeath = true;
+    }
+    public bool GetStatusOfDeath()
+    {
+        return isDeath;
     }
     public void SetMaxHealth(float value)
     {
@@ -47,6 +56,7 @@ public partial class Player_Controller : MonoBehaviour
     {
         if(GetCurrentHealth()<=0)
         {
+            SetStatusOfDeath();
             return;
         }
 
