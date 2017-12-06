@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class ButtonManagement : MonoBehaviour {
-    public void NewGameBtn(string newGameLevel)
+public class ButtonManagement : MonoBehaviour
+{
+    public void NewGameBtn()
     {
-        SceneManager.LoadScene(newGameLevel);
+        SceneManager.LoadScene("game");
+    }
+    public void ExitBtn()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
