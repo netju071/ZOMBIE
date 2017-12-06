@@ -2,15 +2,12 @@
 using UnityEngine.SceneManagement;
 public class MissionWindow : MonoBehaviour
 {
-    private Rect missionWindow;
-    private Rect selectWindow;
-    private Rect reStartWindow;
-    private string minutes,seconds;
-    private int numDyingZombie;
-    private int mission;
+    private Rect missionWindow, selectWindow, reStartWindow;
+    private string minutes, seconds;
+    private int numDyingZombie, mission;
     private float startTime;
     private bool isSelect, toggle;
-    
+
     void Start()
     {
         InitializeMissionWindow();
@@ -38,7 +35,6 @@ public class MissionWindow : MonoBehaviour
     public void IncreaseNumberOfDyingZombie()
     {
         numDyingZombie++;
-        //Debug.Log("Current NumDyingZombie: " + numDyingZombie);
     }
     private void ToggleWindow()
     {
@@ -52,7 +48,7 @@ public class MissionWindow : MonoBehaviour
         minutes = ((int)t / 60).ToString();
         seconds = (t % 60).ToString("f2");
     }
-    
+
     private void OnGUI()
     {
         if (isSelect == false)
@@ -72,14 +68,15 @@ public class MissionWindow : MonoBehaviour
         if (GameObject.Find("/EventSystem").GetComponent<GameController>().GetStatusOfPause())
         {
             GUI.Box(new Rect(Screen.width * 0.35f, Screen.height * 0.15f, 500, 200), "Pause");
-            GUI.skin.textField.fontSize = 20;
-            GUI.skin.textField.alignment = TextAnchor.MiddleCenter;
         }
         if (GameObject.Find("/Player").GetComponent<Player_Controller>().GetStatusOfDie())
         {
-            selectWindow = GUI.Window(0, new Rect(Screen.width * 0.33f, Screen.height * 0.25f, 500, 200), Restart, "ReTry?");
+            reStartWindow = GUI.Window(0, new Rect(Screen.width * 0.33f, Screen.height * 0.25f, 500, 200), Restart, "ReTry?");
         }
+        GUI.skin.textField.fontSize = 20;
+        GUI.skin.textField.alignment = TextAnchor.MiddleCenter;
     }
+
     private void Restart(int id)
     {
         if (GUI.Button(new Rect(selectWindow.width * 0.15f, selectWindow.height * 0.35f, 150, 50), "Yes"))
@@ -91,6 +88,7 @@ public class MissionWindow : MonoBehaviour
             SceneManager.LoadScene("Menu");
         }
     }
+
     private void SelectMission(int id)
     {
         if (GUI.Button(new Rect(selectWindow.width * 0.15f, selectWindow.height * 0.35f, 150, 50), "Time Mission"))
