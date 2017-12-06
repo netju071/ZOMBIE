@@ -85,8 +85,6 @@ public partial class TinyZombie_Controller : MonoBehaviour
     }
     private Vector3 RandomPosition()
     {
-        //float minPosX = -34.94f, maxPosX = 13.5f, minPosZ = -23.26f, maxPosZ = 1.84f;
-        //return new Vector3(Random.Range(minPosX, maxPosX), transform.position.y, Random.Range(minPosZ, maxPosZ));
         return new Vector3(zombie.transform.position.x + Random.Range(-5.0f, 5.0f), zombie.transform.position.y, zombie.transform.position.z + Random.Range(-5.0f, 5.0f));
     }
 }

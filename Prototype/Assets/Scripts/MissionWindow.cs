@@ -75,7 +75,7 @@ public class MissionWindow : MonoBehaviour
             GUI.skin.textField.fontSize = 20;
             GUI.skin.textField.alignment = TextAnchor.MiddleCenter;
         }
-        if (GameObject.Find("/Player").GetComponent<Player_Controller>().GetStatusOfDeath())
+        if (GameObject.Find("/Player").GetComponent<Player_Controller>().GetStatusOfDie())
         {
             selectWindow = GUI.Window(0, new Rect(Screen.width * 0.33f, Screen.height * 0.25f, 500, 200), Restart, "ReTry?");
         }

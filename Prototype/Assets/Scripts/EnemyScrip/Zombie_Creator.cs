@@ -3,7 +3,6 @@
 public class Zombie_Creator : MonoBehaviour
 {
     private GameObject tinyZombie;
-    //private GameObject player;
     private GameObject portal;
     private GameObject fireFiles;
     private int maxNumTinyZombie;
@@ -30,7 +29,6 @@ public class Zombie_Creator : MonoBehaviour
         maxNumTinyZombie = 8;
         numTinyZombie = 0;
         tinyZombie = Resources.Load<GameObject>("Create/TinyZombie");
-        //player= GameObject.Find("/Player/Cha_Knight");
         portal = Resources.Load<GameObject>("TornadoBanditsStudio/Low Poly Free Pack/Prefabs/Particles/Portal_Orb");
         fireFiles = Resources.Load<GameObject>("TornadoBanditsStudio/Low Poly Free Pack/Prefabs/Particles/Particles_Fireflies");
     }
@@ -52,16 +50,6 @@ public class Zombie_Creator : MonoBehaviour
     }
     private Vector3 RandomPosition()
     {
-        //float dist = 9.0f;
-        //Vector3 randPos;
-        //do
-        //{
-        //    randPos = new Vector3(player.transform.position.x + Random.Range(-dist, dist), 0, player.transform.position.z + Random.Range(-dist, dist));
-
-        //} while (dist < Vector3.Distance(randPos, player.transform.position));
-
-        //return randPos;
-
         float minPosX = -17.63f, maxPosX = 30.8f, minPosZ = -14.79f, maxPosZ = 10.66f;
         return new Vector3(Random.Range(minPosX, maxPosX), 0, Random.Range(minPosZ, maxPosZ));
     }
