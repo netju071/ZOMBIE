@@ -69,9 +69,10 @@ public partial class TinyZombie_Controller : MonoBehaviour
         SetStatusOfMovement(true);
         navAgent.destination = GetTargetPosition();
 
-        if (DistanceFromPosition(GetTargetPosition()) == 0)
+        if (DistanceFromPosition(GetTargetPosition()) == 0 || GetTimeToStop() <= Time.time)
         {
             StopMovement();
+            SetTimeToMove();
         }
     }
     private void StopMovement()
